@@ -71,9 +71,66 @@ export const constantRoutes = [
         component: () => import('@/views/index'),
         name: 'Index',
         meta: { title: '首页', icon: 'dashboard', affix: true }
-      }
+      },
     ]
   },
+  {
+    path: '',
+    component: Layout,
+    redirect: 'index',
+    meta: { title: '任务', icon: 'dashboard', affix: true },
+    children: [
+      // {
+      //   path: 'system/task/task',
+      //   component: () => import('@/views/system/task/task'),
+      //   name: 'task',
+      //   meta: { title: '任务', icon: 'dashboard', affix: true }
+      // },
+      {
+        path: 'system/task/taskList',
+        component: () => import('@/views/system/task/taskList'),
+        name: 'taskList',
+        meta: { title: '任务清单', icon: 'dashboard', affix: true }
+      },
+      {
+        path: 'system/task/taskDetail',
+        component: () => import('@/views/system/task/taskDetail'),
+        name: 'taskDetail',
+        meta: { title: '制定任务', icon: 'dashboard', affix: true }
+      },
+      {
+        path: 'system/task/dashboard',
+        component: () => import('@/views/system/task/dashboard'),
+        name: 'dashboard',
+        meta: { title: '任务导航', icon: 'dashboard', affix: true }
+      },
+      {
+        path: 'system/task/calendar',
+        component: () => import('@/views/system/task/calendar'),
+        name: 'calendar',
+        meta: { title: '任务日历', icon: 'dashboard', affix: true }
+      },
+      {
+        path: 'system/task/reminderSetting',
+        component: () => import('@/views/system/task/reminderSetting'),
+        name: 'reminderSetting',
+        meta: { title: '设置提醒', icon: 'dashboard', affix: true }
+      },
+      {
+        path: 'system/task/aiChat',
+        component: () => import('@/views/system/task/aiChat'),
+        name: 'aiChat',
+        meta: { title: 'Ai问答', icon: 'dashboard', affix: true }
+      },
+      {
+        path: 'system/task/createPlan',
+        component: () => import('@/views/system/task/createPlan.vue'),
+        name: 'createPlan',
+        meta: { title: '制定计划', icon: 'dashboard', affix: true }
+      },
+    ]
+  },
+
   {
     path: '/user',
     component: Layout,

@@ -5,15 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="78e14b99-3ad5-4482-9338-84821b49386c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/todo-common/src/main/java/com/todo/common/config/ToDoConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-common/src/main/java/com/todo/common/config/ToDoConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-ui/src/layout/components/Sidebar/Logo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/todo-ui/src/layout/components/Sidebar/Logo.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-ui/src/views/login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/todo-ui/src/views/login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-ui/vue.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/todo-ui/vue.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todo-admin/src/main/resources/application-ai.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todo-ui/src/views/system/task/dashboard.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todo-ui/src/views/system/task/task.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todo-ui/src/views/system/task/taskDetail.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todo-ui/src/views/system/task/taskList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-system/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/todo-system/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-ui/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/todo-ui/src/router/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Vue Single File Component" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -43,6 +53,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/Computer/Java/IntelligentCommunityPlatform/paicoding",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -69,7 +80,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1740632346130</updated>
-      <workItem from="1740632347554" duration="9604000" />
+      <workItem from="1740632347554" duration="16550000" />
     </task>
     <servers />
   </component>
