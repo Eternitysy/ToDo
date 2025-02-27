@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * @author ruoyi
  */
 @Component
-@ConfigurationProperties(prefix = "ruoyi")
+@ConfigurationProperties(prefix = "todo")
 public class ToDoConfig
 {
     /** 项目名称 */
