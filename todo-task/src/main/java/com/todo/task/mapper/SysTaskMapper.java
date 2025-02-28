@@ -1,14 +1,17 @@
 package com.todo.task.mapper;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import com.todo.common.core.domain.entity.SysTask;
 
 /**
  * 任务管理 数据层
  *
- * @author ruoyi
+ * @author sy
  */
+@Mapper
 public interface SysTaskMapper
 {
     /**

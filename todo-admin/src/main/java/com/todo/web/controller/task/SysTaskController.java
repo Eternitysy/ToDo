@@ -1,4 +1,4 @@
-package com.todo.task.controller;
+package com.todo.web.controller.task;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ import com.todo.common.utils.StringUtils;
 /**
  * 任务信息
  * 
- * @author ruoyi
+ * @author sy
  */
 @RestController
 @RequestMapping("/tasks/task")
