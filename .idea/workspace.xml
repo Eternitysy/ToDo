@@ -4,26 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="78e14b99-3ad5-4482-9338-84821b49386c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/todo-admin/src/main/resources/application-ai.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/todo-ui/src/views/system/task/dashboard.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/todo-ui/src/views/system/task/task.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/todo-ui/src/views/system/task/taskDetail.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/todo-ui/src/views/system/task/taskList.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-system/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/todo-system/pom.xml" afterDir="false" />
+    <list default="true" id="543a4985-4a4d-400f-9abe-bc3c5d4a666e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/todo-ui/src/api/tasks/task.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todo-ui/src/views/tasks/task/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/todo-common/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-common/src/main/java/com/todo/common/annotation/DataScope.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-common/src/main/java/com/todo/common/annotation/DataScope.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-common/src/main/java/com/todo/common/constant/UserConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-common/src/main/java/com/todo/common/constant/UserConstants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-common/src/main/java/com/todo/common/core/domain/TreeSelect.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-common/src/main/java/com/todo/common/core/domain/TreeSelect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-common/src/main/java/com/todo/common/core/domain/entity/SysRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-common/src/main/java/com/todo/common/core/domain/entity/SysRole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-task/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/todo-task/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/controller/SysTaskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/controller/SysTaskController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/domain/SysTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-common/src/main/java/com/todo/common/core/domain/entity/SysTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/mapper/SysTaskMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/mapper/SysTaskMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/service/ISysTaskService.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/service/ISysTaskService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/service/impl/SysTaskServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/service/impl/SysTaskServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-task/src/main/resources/task/SysTaskMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/todo-task/src/main/resources/task/SysTaskMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-ui/src/api/system/task.js" beforeDir="false" afterPath="$PROJECT_DIR$/todo-ui/src/api/system/tasks.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/todo-ui/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/todo-ui/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-ui/src/views/system/task/task.vue" beforeDir="false" afterPath="$PROJECT_DIR$/todo-ui/src/views/system/task/task.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Vue Single File Component" />
-      </list>
-    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -39,7 +42,10 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectId" id="2tbsvF9LfXBgDKwSAqvie3E17Qz" />
+  <component name="ProjectId" id="2tfvwRKH2HUfrzS2vqKsDqZ4gB1" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -50,20 +56,48 @@
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
     "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Computer/Java/IntelligentCommunityPlatform/paicoding",
+    "last_opened_file_path": "D:/Computer/Java/ToDo/todo-ui/src/api/task",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "settings.editor.selected.configurable": "MavenSettings",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Computer\Java\ToDo\todo-ui\src\api\task" />
+      <recent name="D:\Computer\Java\ToDo\todo-ui\src\views\task" />
+      <recent name="D:\Computer\Java\ToDo\todo-task\src\main\resources\task" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Computer\Java\ToDo\todo-ui\src\views\tasks\task" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.todo.common.core.domain.entity" />
+      <recent name="com.todo.task.mapper" />
+      <recent name="com.todo.task.service.impl" />
+      <recent name="com.todo.task.service" />
+    </key>
+  </component>
   <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="ToDo" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="ToDo" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ToDoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="todo-admin" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.todo.ToDoApplication" />
@@ -75,12 +109,12 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="78e14b99-3ad5-4482-9338-84821b49386c" name="Changes" comment="" />
-      <created>1740632346130</created>
+      <changelist id="543a4985-4a4d-400f-9abe-bc3c5d4a666e" name="Changes" comment="" />
+      <created>1740756196258</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1740632346130</updated>
-      <workItem from="1740632347554" duration="16550000" />
+      <updated>1740756196258</updated>
+      <workItem from="1740756199842" duration="12678000" />
     </task>
     <servers />
   </component>

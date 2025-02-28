@@ -30,4 +30,6 @@ public @interface DataScope
      * 权限字符（用于多个角色匹配符合要求的权限）默认根据权限注解@ss获取，多个权限用逗号分隔开来
      */
     public String permission() default "";
+
+    String taskAlias() default "";
 }

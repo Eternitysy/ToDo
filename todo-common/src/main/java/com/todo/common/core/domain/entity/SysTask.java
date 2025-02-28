@@ -1,9 +1,12 @@
-package com.todo.task.domain;
+package com.todo.common.core.domain.entity;
 
 import com.todo.common.annotation.Excel;
 import com.todo.common.annotation.Excel.ColumnType;
 import com.todo.common.core.domain.BaseEntity;
 import lombok.Data;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 任务表
@@ -23,6 +26,15 @@ public class SysTask extends BaseEntity
     @Excel(name = "任务名称")
     private String taskName;
 
+    /** 父任务ID */
+    private Long parentId;
+
+    /** 父任务名称 */
+    private String parentName;
+
+    /** 祖级列表 */
+    private String ancestors;
+
     /** 任务组名 */
     @Excel(name = "任务组名")
     private String taskGroup;
@@ -31,12 +43,23 @@ public class SysTask extends BaseEntity
     @Excel(name = "任务描述")
     private String description;
 
-    /** 任务优先级 */
+    /** 任务期限 */
+    @Excel(name = "任务期限")
+    private String deadline;
+
+
+    /** 任务优先级(显示顺序) */
     @Excel(name = "任务优先级", readConverterExp = "0=高,1=中,-1=低")
-    private String priority;
+    private Integer orderNum;
 
     /** 任务状态 */
     @Excel(name = "任务状态", readConverterExp = "0=已完成,1=进行中,-1=未开始")
     private String status;
+
+    /** 删除标志（0代表存在 2代表删除） */
+    private String delFlag;
+
+    /** 子任务 */
+    private List<SysTask> children = new ArrayList<SysTask>();
 
 }

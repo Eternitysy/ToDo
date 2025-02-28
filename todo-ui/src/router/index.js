@@ -77,7 +77,7 @@ export const constantRoutes = [
   {
     path: '',
     component: Layout,
-    redirect: 'task',
+    redirect: 'taskt',
     meta: { title: '任务', icon: 'dashboard', affix: true },
     children: [
       // {
@@ -87,7 +87,7 @@ export const constantRoutes = [
       //   meta: { title: '任务', icon: 'dashboard', affix: true }
       // },
       {
-        path: 'system/task/list',
+        path: 'task/list',
         component: () => import('@/views/system/task/task'),
         name: 'taskList',
         meta: { title: '任务清单', icon: 'dashboard', affix: true }

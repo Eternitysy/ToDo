@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { listTask, getTask, delTask, addTask, updateTask, runTask, changeTAskStatus } from "@/api/system/task";
+import { listTask, getTask, delTask, addTask, updateTask, runTask, changeTAskStatus } from "@/api/system/tasks";
 
 export default {
   data() {

@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.todo.common.constant.UserConstants;
 import com.todo.common.core.domain.entity.SysDept;
 import com.todo.common.core.domain.entity.SysMenu;
+import com.todo.common.core.domain.entity.SysTask;
 import com.todo.common.utils.StringUtils;
 
 /**
@@ -36,12 +37,12 @@ public class TreeSelect implements Serializable
 
     }
 
-    public TreeSelect(SysDept dept)
+    public TreeSelect(SysTask task)
     {
-        this.id = dept.getDeptId();
-        this.label = dept.getDeptName();
-        this.disabled = StringUtils.equals(UserConstants.DEPT_DISABLE, dept.getStatus());
-        this.children = dept.getChildren().stream().map(TreeSelect::new).collect(Collectors.toList());
+        this.id = task.getTaskId();
+        this.label = task.getTaskName();
+        this.disabled = StringUtils.equals(UserConstants.TASK_DISABLE, task.getStatus());
+        this.children = task.getChildren().stream().map(TreeSelect::new).collect(Collectors.toList());
     }
 
     public TreeSelect(SysMenu menu)
@@ -49,6 +50,13 @@ public class TreeSelect implements Serializable
         this.id = menu.getMenuId();
         this.label = menu.getMenuName();
         this.children = menu.getChildren().stream().map(TreeSelect::new).collect(Collectors.toList());
+    }
+
+    public TreeSelect(SysDept dept) {
+        this.id = dept.getDeptId();
+        this.label = dept.getDeptName();
+        this.disabled = StringUtils.equals(UserConstants.TASK_DISABLE, dept.getStatus());
+        this.children = dept.getChildren().stream().map(TreeSelect::new).collect(Collectors.toList());
     }
 
     public Long getId()
