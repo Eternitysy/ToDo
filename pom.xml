@@ -228,6 +228,7 @@
         <module>todo-quartz</module>
         <module>todo-generator</module>
         <module>todo-common</module>
+        <module>todo-task</module>
     </modules>
     <packaging>pom</packaging>
 

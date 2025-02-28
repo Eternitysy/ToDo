@@ -1,5 +1,6 @@
 package com.todo.quartz.util;
 
+import com.todo.quartz.domain.SysJob;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
 import org.quartz.Job;
@@ -16,7 +17,6 @@ import com.todo.common.exception.job.TaskException;
 import com.todo.common.exception.job.TaskException.Code;
 import com.todo.common.utils.StringUtils;
 import com.todo.common.utils.spring.SpringUtils;
-import com.todo.quartz.domain.SysJob;
 
 /**
  * 定时任务工具类

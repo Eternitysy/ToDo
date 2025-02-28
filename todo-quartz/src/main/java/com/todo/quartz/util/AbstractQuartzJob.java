@@ -1,6 +1,10 @@
 package com.todo.quartz.util;
 
 import java.util.Date;
+
+import com.todo.quartz.domain.SysJob;
+import com.todo.quartz.domain.SysJobLog;
+import com.todo.quartz.service.ISysJobLogService;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -12,9 +16,6 @@ import com.todo.common.utils.ExceptionUtil;
 import com.todo.common.utils.StringUtils;
 import com.todo.common.utils.bean.BeanUtils;
 import com.todo.common.utils.spring.SpringUtils;
-import com.todo.quartz.domain.SysJob;
-import com.todo.quartz.domain.SysJobLog;
-import com.todo.quartz.service.ISysJobLogService;
 
 /**
  * 抽象quartz调用

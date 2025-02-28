@@ -1,33 +1,38 @@
 <template>
   <div class="dashboard">
-    <el-row :gutter="20">
       <!-- 左侧任务统计 -->
       <el-col :span="6">
-        <el-card>
-          <h3>任务统计</h3>
+        <el-card style="width: 600px;height: 220px">
+          <h2>任务统计</h2>
           <el-row :gutter="20">
             <el-col :span="8">
               <div class="task-stat">
                 <div class="task-title">未完成</div>
-                <div class="task-count">{{ tasksCount.pending }}</div>
+                <div class="task-count"style="color: #ff4d51">{{ tasksCount.pending }}</div>
               </div>
             </el-col>
             <el-col :span="8">
               <div class="task-stat">
                 <div class="task-title">进行中</div>
-                <div class="task-count">{{ tasksCount.inProgress }}</div>
+                <div class="task-count"style="color: #1c84c6">{{ tasksCount.inProgress }}</div>
               </div>
             </el-col>
             <el-col :span="8">
               <div class="task-stat">
                 <div class="task-title">已完成</div>
-                <div class="task-count">{{ tasksCount.completed }}</div>
+                <div class="task-count"style="color: #1ab394">{{ tasksCount.completed }}</div>
               </div>
             </el-col>
           </el-row>
         </el-card>
+        <!-- 创建计划按钮 -->
+        <div class="button-container">
+          <el-button @click="goToCreatePlan" type="primary">制定计划</el-button>
+        </div>
       </el-col>
 
+    <!-- 任务日历 -->
+    <div class="calendar-container custom-calendar" style="max-width: 800px;height: auto;margin-left: 800px">
       <!-- 右侧近期任务预览 -->
       <el-col :span="18">
         <el-card>
@@ -39,32 +44,26 @@
             <el-table-column label="状态" prop="status"></el-table-column>
           </el-table>
         </el-card>
-      </el-col>
-    </el-row>
 
-    <!-- 创建计划按钮 -->
-    <el-button @click="goToCreatePlan" type="primary" style="margin-top: 20px;">制定计划</el-button>
-
-    <!-- 任务日历 -->
-    <div class="calendar-container">
       <h3 style="margin-top: 30px;">任务日历</h3>
-      <el-calendar v-model="selectedDate">
-      <div
-        slot="dateCell"
-        slot-scope="{ data }"
-        @click="showTaskDetail(data)"
-        v-popover:popover
-      >
-        <p>
-          {{ data.day.split("-").slice(2).join()}}
-        </p>
-      </div>
-      </el-calendar>
+          <el-calendar v-model="selectedDate">
+            <div
+              slot="dateCell"
+              slot-scope="{ data }"
+              @click="showTaskDetail(data)"
+              v-popover:popover
+            >
+              <p style="font-size: 12px;margin-top: 2px">
+                {{ data.day.split("-").slice(2).join()}}
+              </p>
+            </div>
+          </el-calendar>
+      </el-col>
     </div>
 
     <!-- 任务详情对话框 -->
-    <el-dialog :visible.sync="taskDetailDialogVisible" width="40%">
-      <h3>{{ taskDetail.title }}</h3>
+    <el-dialog :visible.sync="taskDetailDialogVisible" width="500px">
+      <h3>{{ taskDetail.taskName }}</h3>
       <p><strong>描述:</strong> {{ taskDetail.description }}</p>
       <p><strong>优先级:</strong> {{ taskDetail.priority }}</p>
       <p><strong>状态:</strong> {{ taskDetail.status }}</p>
@@ -83,13 +82,15 @@ export default {
         completed: 10
       },
       recentTasks: [
-        { title: "任务1", deadline: "2025-02-15", priority: "高", status: "进行中" },
-        { title: "任务2", deadline: "2023-10-16", priority: "中", status: "未完成" }
+        { taskName: "任务1", deadline: "2025-02-15", priority: "高", status: "进行中" },
+        { taskName: "任务2", deadline: "2023-10-16", priority: "中", status: "未开始" },
+        { taskName: "任务3", deadline: "2025-02-17", priority: "中", status: "已完成" },
       ],
       selectedDate: '', // 设置为初始空值，点击后更新
       taskDates: [
-        { date: '2023-10-15', isTask: true },
-        { date: '2023-10-16', isTask: true }
+        { date: '2025-02-15', isTask: true },
+        { date: '2023-10-16', isTask: true },
+        { date: '2025-02-17', isTask: true },
       ],
       taskDetail: {},
       taskDetailDialogVisible: false
@@ -101,12 +102,9 @@ export default {
     },
     // 显示任务详情对话框
     showTaskDetail(date) {
-      console.log(date)
-      this.taskDetailDialogVisible = true;
       // 根据点击的日期找到任务
       this.selectedDate = date;  // 更新selectedDate
-      const task = this.recentTasks.find(task => task.deadline === date);
-      console.log(task)
+      const task = this.recentTasks.find(task => task.deadline === date.day);
       if (task) {
         this.taskDetail = task;
         this.taskDetailDialogVisible = true;
@@ -139,19 +137,30 @@ export default {
 }
 
 .task-title {
-  font-size: 16px;
+  font-size: 25px;
   color: #666;
 }
 
-.task-count {
-  font-size: 24px;
+.task-count{
+  padding-top: 15px;
+  font-size: 40px;
   font-weight: bold;
+}
+.button-container {
+  margin-top: 20px; /* 根据需要调整间距 */
+  width: 100%; /* 确保按钮宽度适应父容器 */
+  display: flex;
+  justify-content: center; /* 水平居中 */
 }
 
 .calendar-container {
-  margin-top: 30px;
   text-align: center;
 }
+/* 调整日历单元格大小 */
+.custom-calendar /deep/ .el-calendar-table .el-calendar-day {
+  height: 30px !important;
+}
+
 
 .el-button {
   margin-top: 20px;
