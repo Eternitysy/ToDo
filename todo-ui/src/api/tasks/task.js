@@ -1,5 +1,10 @@
 import request from '@/utils/request'
+import axios from "axios";
 
+const instance = axios.create({
+  baseURL: process.env.VUE_APP_API_URL || "", // 配置你的后端 baseURL
+  timeout: 1000000, // 设置超时时间为10秒
+});
 // 查询任务列表
 export function listTask(query) {
   return request({
@@ -48,5 +53,29 @@ export function delTask(taskId) {
   return request({
     url: '/tasks/task/' + taskId,
     method: 'delete'
+  })
+}
+
+// 调用Ai聊天
+export function chat(message,tokenMax) {
+  return request({
+    url: '/tasks/ai/chat',
+    method: 'post',
+    params: {
+      message: message,
+      maxTokens: tokenMax
+    }
+  })
+}
+
+// 调用Ai拆分任务
+export function generateTask(message,tokenMax) {
+  return request({
+    url: '/tasks/ai/generateTask',
+    method: 'post',
+    params: {
+      message: message,
+      maxTokens: tokenMax
+    }
   })
 }

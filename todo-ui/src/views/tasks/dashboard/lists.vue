@@ -75,7 +75,7 @@
 </template>
 
 <script>
-import { listTask } from "@/api/tasks/task"; // 根据实际路径调整
+import { listTask } from "@/api/tasks/task";
 
 export default {
   data() {
@@ -101,7 +101,7 @@ export default {
   },
   methods: {
     goToCreatePlan() {
-      this.$router.push('/tasks/task/add');
+      this.$router.push('tasks/ai/chat');
     },
     // 获取任务列表，并手动处理为最高父级任务数组
     getTaskList() {

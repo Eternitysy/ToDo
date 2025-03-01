@@ -130,14 +130,14 @@ export const constantRoutes = [
         meta: { title: '设置提醒', icon: 'dashboard', affix: true }
       },
       {
-        path: 'system/task/aiChat',
-        component: () => import('@/views/system/task/aiChat'),
+        path: 'tasks/ai/chat',
+        component: () => import('@/views/tasks/ai/chat'),
         name: 'aiChat',
         meta: { title: 'Ai问答', icon: 'dashboard', affix: true }
       },
       {
         path: 'system/task/createPlan',
-        component: () => import('@/views/system/task/createPlan.vue'),
+        component: () => import('@/views/system/task/createPlan'),
         name: 'createPlan',
         meta: { title: '制定计划', icon: 'dashboard', affix: true }
       },
