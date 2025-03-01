@@ -5,20 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="543a4985-4a4d-400f-9abe-bc3c5d4a666e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/todo-admin/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/todo-admin/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-framework/src/main/java/com/todo/framework/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-framework/src/main/java/com/todo/framework/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-task/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/todo-task/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/config/ScheduleConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/config/ScheduleConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/controller/SysTaskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-admin/src/main/java/com/todo/web/controller/task/SysTaskController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/mapper/SysTaskMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/mapper/SysTaskMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/service/impl/SysTaskServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/service/impl/SysTaskServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-task/src/main/resources/task/SysTaskMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/todo-task/src/main/resources/mapper/task/SysTaskMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-ui/src/views/tasks/task/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/todo-ui/src/views/tasks/task/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todo-ui/src/views/system/task/test.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todo-ui/src/views/tasks/dashboard/lists.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-ui/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/todo-ui/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-ui/src/store/modules/permission.js" beforeDir="false" afterPath="$PROJECT_DIR$/todo-ui/src/store/modules/permission.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Vue Single File Component" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -60,6 +62,8 @@
     "project.structure.proportion": "0.15136719",
     "project.structure.side.proportion": "0.20415223",
     "settings.editor.selected.configurable": "MavenSettings",
+    "spring.configuration.checksum": "0d2ad5f3fd0adf4d1f572ddc55ee8633",
+    "ts.external.directory.path": "E:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.1\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -70,6 +74,8 @@
       <recent name="D:\Computer\Java\ToDo\todo-task\src\main\resources\task" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Computer\Java\ToDo\todo-ui\src\views\system\task" />
+      <recent name="D:\Computer\Java\ToDo\todo-ui\src\views\tasks\dashboard" />
       <recent name="D:\Computer\Java\ToDo\todo-task\src\main\resources\mapper\task" />
       <recent name="D:\Computer\Java\ToDo\todo-ui\src\views\tasks\task" />
     </key>
@@ -110,7 +116,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1740756196258</updated>
-      <workItem from="1740756199842" duration="20159000" />
+      <workItem from="1740756199842" duration="21113000" />
+      <workItem from="1740809542805" duration="17108000" />
     </task>
     <servers />
   </component>
