@@ -44,4 +44,6 @@ public interface ISysTaskService {
     int updateTask(SysTask task);
 
     int deleteTaskById(Long taskId);
+
+    int insertTasks(List<SysTask> taskList);
 }

@@ -1,5 +1,9 @@
 package com.todo.task.mapper;
 
+import com.todo.common.core.domain.entity.SysTask;
+
+import java.util.List;
+
 /**
  * className: SysAiChatMapper
  * <p>
@@ -9,4 +13,5 @@ package com.todo.task.mapper;
  * version: 1.0
  */
 public interface SysAiChatMapper {
+
 }

@@ -5,7 +5,7 @@
       <el-col :span="14" class="chat-container">
         <el-card class="chat-card">
           <div class="chat-header">
-            <h3>与AI对话</h3>
+            <h2>与AI对话</h2>
           </div>
           <!-- 聊天记录区域 -->
           <div class="chat-history" ref="chatHistory">
@@ -53,12 +53,17 @@
             <el-table-column
               label="任务名称"
               prop="taskName"
-              width="200"
+              width="100"
+            ></el-table-column>
+            <el-table-column
+              label="任务描述"
+              prop="taskName"
+              width="150"
             ></el-table-column>
             <el-table-column
               label="优先级"
-              prop="priority"
-              width="120"
+              prop="orderNum"
+              width="90"
             ></el-table-column>
             <el-table-column
               label="截止日期"
@@ -68,15 +73,25 @@
             <el-table-column label="操作" width="100">
               <template slot-scope="scope">
                 <el-button
+                  @click="editTask(scope.row)"
+                  type="text"
+                >编辑</el-button
+                >
+                <el-button
                   @click="deleteTask(scope.row)"
                   type="text"
                   style="color: red"
+                >删除</el-button
                 >
-                  删除
-                </el-button>
               </template>
             </el-table-column>
           </el-table>
+          <!-- 提交按钮 -->
+          <div class="submit-container">
+            <el-button type="success" @click="submitTasks">
+              提交任务
+            </el-button>
+          </div>
         </el-card>
       </el-col>
     </el-row>
@@ -84,29 +99,31 @@
 </template>
 
 <script>
-
-import {chat,generateTask,listTask} from "@/api/tasks/task";
+// 假设已封装好与后端交互的 API 方法，如 generateTask、chat、deleteTask、submitTask 等
+import { generateTask, chat, addTasks } from "@/api/tasks/task";
 
 export default {
   data() {
     return {
-      goal: "", // 用户输入的目标任务
-      taskList: [], // 拆解后的任务列表
-      conversation: [], // 聊天记录：每个消息有 type ('user' 或 'ai') 和 text
+      goal: "", // 用户输入的目标任务（用于拆解任务）
+      taskList: [], // AI拆解后的任务列表
+      conversation: [], // 聊天记录：每个消息包含 type ('user' 或 'ai') 和 text
       userQuestion: "", // 用户输入的聊天内容
     };
   },
   methods: {
-    // 用户点击“生成任务”，调用AI接口拆解目标
+    // 调用 AI 接口拆解用户目标，生成任务列表
     async generateTasks() {
       if (!this.goal.trim()) {
         this.$message.warning("请输入目标任务！");
         return;
       }
-      // 将用户目标添加到对话记录
+      // 将用户输入目标加入对话记录
       this.conversation.push({ type: "user", text: this.goal });
       try {
-        this.taskList = await generateTask(message,500);
+        // 调用 generateTask API，传入用户目标及最大token数
+        this.taskList = await generateTask(this.goal, 500);
+        // 将 AI 拆解结果添加到对话记录
         this.conversation.push({
           type: "ai",
           text: "目标已拆解，任务列表已更新。",
@@ -117,21 +134,20 @@ export default {
         this.$message.error("任务拆解失败，请稍后再试！");
       }
     },
-    // 发送聊天消息，向AI提问
+    // 向 AI 提问（对话功能）
     async sendChat() {
-      const message = this.userQuestion.trim();
-      console.log(message)
-      if (!message) {
+      const question = this.userQuestion.trim();
+      if (!question) {
         this.$message.warning("请输入问题！");
         return;
       }
-      // 将用户问题添加到对话记录
-      this.conversation.push({ type: "user", text: message });
+      // 将用户问题加入对话记录
+      this.conversation.push({ type: "user", text: question });
       this.userQuestion = "";
       this.scrollChatToBottom();
       try {
-        const response = await chat(message,500);
-        console.log(response)
+        const response = await chat(question, 500);
+        // 假设返回结果是纯文本回答
         this.conversation.push({ type: "ai", text: response });
         this.scrollChatToBottom();
       } catch (error) {
@@ -139,16 +155,31 @@ export default {
         this.$message.error("获取AI建议失败，请稍后再试！");
       }
     },
+    // 编辑任务（此处仅示例，具体实现可弹窗或跳转至编辑页面）
+    editTask(task) {
+      this.$message.info(`编辑任务: ${task.taskName}`);
+      // 可跳转至任务编辑页面或弹出编辑对话框
+    },
     // 删除任务
     deleteTask(task) {
       this.$confirm(`确定删除任务: ${task.taskName}?`, "提示", {
         type: "warning",
       }).then(() => {
         this.taskList = this.taskList.filter(
-          (item) => item.taskId !== task.taskId
+          (item) => item.taskName !== task.taskName
         );
         this.$message.success("任务删除成功");
       });
+    },
+    // 提交任务（将最终任务拆解结果提交到后端）
+    async submitTasks() {
+      try {
+        await addTasks(this.taskList);
+        this.$message.success("任务提交成功");
+      } catch (error) {
+        console.error("任务提交失败:", error);
+        this.$message.error("任务提交失败，请稍后再试！");
+      }
     },
     // 滚动聊天记录到底部
     scrollChatToBottom() {
@@ -170,6 +201,7 @@ export default {
   min-height: 100vh;
 }
 
+/* 主区域 */
 .main-content {
   margin-bottom: 20px;
 }
@@ -179,10 +211,9 @@ export default {
   background: #fff;
   border-radius: 4px;
   height: calc(100vh - 100px);
-  position: relative;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
+  overflow: hidden;
 }
 
 .chat-card {
@@ -196,6 +227,7 @@ export default {
   padding: 10px;
   border-bottom: 1px solid #ebeef5;
   background-color: #fff;
+  text-align: center;
 }
 
 .chat-history {
@@ -226,15 +258,12 @@ export default {
 
 /* 固定在聊天区域底部的输入区域 */
 .chat-input-container {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  display: flex;
-  align-items: center;
+  position: relative;
   padding: 10px;
   background-color: #fff;
   border-top: 1px solid #ebeef5;
+  display: flex;
+  align-items: center;
 }
 
 .chat-input-container .el-input {
@@ -259,4 +288,9 @@ export default {
   margin-bottom: 10px;
 }
 
+/* 提交按钮容器 */
+.submit-container {
+  text-align: center;
+  margin-top: 15px;
+}
 </style>

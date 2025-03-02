@@ -5,19 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="543a4985-4a4d-400f-9abe-bc3c5d4a666e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/todo-admin/src/main/java/com/todo/web/controller/task/SysAiChatController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/domain/SysAiChat.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/mapper/SysAiChatMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/service/SysAiChatService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/service/impl/SysAiChatServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/todo-ui/src/views/tasks/ai/chat.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-admin/src/test/java/test.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-task/src/test/java/test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-task/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/todo-task/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-ui/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/todo-ui/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-admin/src/main/java/com/todo/web/controller/task/SysTaskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-admin/src/main/java/com/todo/web/controller/task/SysTaskController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/mapper/SysAiChatMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/mapper/SysAiChatMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/service/ISysTaskService.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/service/ISysTaskService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/service/impl/SysAiChatServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/service/impl/SysAiChatServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/service/impl/SysTaskServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/service/impl/SysTaskServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/todo-ui/src/api/tasks/task.js" beforeDir="false" afterPath="$PROJECT_DIR$/todo-ui/src/api/tasks/task.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-ui/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/todo-ui/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-ui/src/utils/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/todo-ui/src/utils/request.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-ui/src/views/tasks/dashboard/lists.vue" beforeDir="false" afterPath="$PROJECT_DIR$/todo-ui/src/views/tasks/dashboard/lists.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-ui/src/views/tasks/ai/chat.vue" beforeDir="false" afterPath="$PROJECT_DIR$/todo-ui/src/views/tasks/ai/chat.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,7 +140,7 @@
       <option name="presentableId" value="Default" />
       <updated>1740756196258</updated>
       <workItem from="1740756199842" duration="21113000" />
-      <workItem from="1740809542805" duration="30722000" />
+      <workItem from="1740809542805" duration="43002000" />
     </task>
     <servers />
   </component>

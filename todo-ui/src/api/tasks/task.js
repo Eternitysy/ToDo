@@ -39,6 +39,15 @@ export function addTask(data) {
   })
 }
 
+// 新增多条任务
+export function addTasks(data) {
+  return request({
+    url: '/tasks/task/addTasks',
+    method: 'post',
+    data: data
+  })
+}
+
 // 修改任务
 export function updateTask(data) {
   return request({
@@ -72,7 +81,7 @@ export function chat(message,tokenMax) {
 export function generateTask(message,tokenMax) {
   return request({
     url: '/tasks/ai/generateTask',
-    method: 'post',
+    method: 'get',
     params: {
       message: message,
       maxTokens: tokenMax

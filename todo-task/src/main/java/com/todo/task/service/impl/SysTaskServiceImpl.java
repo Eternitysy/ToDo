@@ -223,6 +223,20 @@ public class SysTaskServiceImpl implements ISysTaskService
     }
 
     /**
+     * 新增保存多条任务信息
+     *
+     * @param taskList 任务信息
+     * @return 结果
+     */
+    @Override
+    public int insertTasks(List<SysTask> taskList) {
+        for(SysTask task:taskList){
+            taskMapper.insertTask(task);
+        }
+        return 1;
+    }
+
+    /**
      * 修改保存任务信息
      * 
      * @param task 任务信息

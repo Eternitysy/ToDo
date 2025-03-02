@@ -86,6 +86,22 @@ public class SysTaskController extends BaseController
     }
 
     /**
+     * 新增多条任务
+     */
+    @Log(title = "新增任务", businessType = BusinessType.INSERT)
+    @PostMapping("/addTasks")
+    public AjaxResult addTasks(@Validated @RequestBody List<SysTask> taskList)
+    {
+        for(SysTask task:taskList){
+            if (!taskService.checkTaskNameUnique(task))
+            {
+                return error("新增任务'" + task.getTaskName() + "'失败，任务名称已存在");
+            }
+        }
+        return toAjax(taskService.insertTasks(taskList));
+    }
+
+    /**
      * 修改任务
      */
     @PreAuthorize("@ss.hasPermi('tasks:task:edit')")

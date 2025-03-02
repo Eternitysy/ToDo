@@ -26,8 +26,9 @@
             </el-col>
           </el-row>
         </el-card>
-        <div class="button-container">
-          <el-button @click="goToCreatePlan" type="primary">制定计划</el-button>
+        <div class="button-container" style="padding-top: 15px">
+          <el-button @click="goToCreatePlan" type="primary">Ai智能制定计划</el-button>
+          <el-button @click="goToCreatePlanBySelf" type="primary">个人手动制定计划</el-button>
         </div>
       </el-col>
 
@@ -102,6 +103,9 @@ export default {
   methods: {
     goToCreatePlan() {
       this.$router.push('tasks/ai/chat');
+    },
+    goToCreatePlanBySelf(){
+      this.$router.push('tasks/task');
     },
     // 获取任务列表，并手动处理为最高父级任务数组
     getTaskList() {
