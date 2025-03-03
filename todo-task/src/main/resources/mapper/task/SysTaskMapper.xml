@@ -115,8 +115,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="taskName != null and taskName != ''">task_name = #{taskName},</if>
  			<if test="ancestors != null and ancestors != ''">ancestors = #{ancestors},</if>
  			<if test="orderNum != null">order_num = #{orderNum},</if>
-			<if test="description != null and description != ''">#{description},</if>
-			<if test="deadline != null and deadline != ''">#{deadline},</if>
+			<if test="description != null and description != ''">description = #{description},</if>
+			<if test="deadline != null and deadline != ''">deadline = #{deadline},</if>
  			<if test="status != null and status != ''">status = #{status},</if>
  			update_time = sysdate()
  		</set>

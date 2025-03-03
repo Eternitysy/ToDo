@@ -49,11 +49,11 @@ public class SysTask extends BaseEntity
 
 
     /** 任务优先级(显示顺序) */
-    @Excel(name = "任务优先级", readConverterExp = "0=高,1=中,-1=低")
+    @Excel(name = "任务优先级")
     private Integer orderNum;
 
     /** 任务状态 */
-    @Excel(name = "任务状态", readConverterExp = "0=已完成,1=进行中,-1=未开始")
+    @Excel(name = "任务状态", readConverterExp = "2=已完成,1=进行中,0=未开始")
     private String status;
 
     /** 删除标志（0代表存在 2代表删除） */

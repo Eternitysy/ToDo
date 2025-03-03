@@ -120,9 +120,9 @@ export default {
         // 提取截止日期用于日历标记
         this.calendarTaskDates = rawTasks.map(task => this.formatDate(task.deadline));
         // 统计任务状态（根据实际字段调整）
-        this.tasksCount.pending = rawTasks.filter(task => task.status === '-1').length;
+        this.tasksCount.pending = rawTasks.filter(task => task.status === '0').length;
         this.tasksCount.inProgress = processedTasks.filter(task => task.status === '1').length;
-        this.tasksCount.completed = processedTasks.filter(task => task.status === '0').length;
+        this.tasksCount.completed = processedTasks.filter(task => task.status === '2').length;
       });
     },
     // 处理任务数据，筛选出最高父级任务

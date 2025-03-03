@@ -1,150 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
-  </component>
-  <component name="ChangeListManager">
-    <list default="true" id="543a4985-4a4d-400f-9abe-bc3c5d4a666e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/todo-admin/src/main/java/com/todo/web/controller/task/SysTaskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-admin/src/main/java/com/todo/web/controller/task/SysTaskController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/mapper/SysAiChatMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/mapper/SysAiChatMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/service/ISysTaskService.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/service/ISysTaskService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/service/impl/SysAiChatServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/service/impl/SysAiChatServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/service/impl/SysTaskServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/service/impl/SysTaskServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-ui/src/api/tasks/task.js" beforeDir="false" afterPath="$PROJECT_DIR$/todo-ui/src/api/tasks/task.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-ui/src/views/tasks/ai/chat.vue" beforeDir="false" afterPath="$PROJECT_DIR$/todo-ui/src/views/tasks/ai/chat.vue" afterDir="false" />
-    </list>
-    <option name="SHOW_DIALOG" value="false" />
-    <option name="HIGHLIGHT_CONFLICTS" value="true" />
-    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
-    <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Vue Single File Component" />
-        <option value="Class" />
-        <option value="Interface" />
-      </list>
-    </option>
-  </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
         <option name="mavenHome" value="E:/Software/Maven/apache-maven-3.9.8" />
-        <option name="useMavenConfig" value="true" />
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectId" id="2tfvwRKH2HUfrzS2vqKsDqZ4gB1" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
-  <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showLibraryContents" value="true" />
-  </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Computer/Java/LibraryManagement",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15136719",
-    "project.structure.side.proportion": "0.20415223",
-    "settings.editor.selected.configurable": "MavenSettings",
-    "spring.configuration.checksum": "0d2ad5f3fd0adf4d1f572ddc55ee8633",
-    "ts.external.directory.path": "E:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.1\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;
   }
-}]]></component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Computer\Java\ToDo\todo-ui\src\api\task" />
-      <recent name="D:\Computer\Java\ToDo\todo-ui\src\views\task" />
-      <recent name="D:\Computer\Java\ToDo\todo-task\src\main\resources\task" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Computer\Java\ToDo\todo-ui\src\views\system\task" />
-      <recent name="D:\Computer\Java\ToDo\todo-ui\src\views\tasks\dashboard" />
-      <recent name="D:\Computer\Java\ToDo\todo-task\src\main\resources\mapper\task" />
-      <recent name="D:\Computer\Java\ToDo\todo-ui\src\views\tasks\task" />
-    </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.todo.common.core.domain.entity" />
-      <recent name="com.todo.task.mapper" />
-      <recent name="com.todo.task.service.impl" />
-      <recent name="com.todo.task.service" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Spring Boot.ToDoApplication">
-    <configuration name="test.testChat" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="todo-task" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="test" />
-      <option name="METHOD_NAME" value="testChat" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="ToDo" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="ToDo" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ToDoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="todo-admin" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.todo.ToDoApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="JUnit.test.testChat" />
-      </list>
-    </recent_temporary>
-  </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
-  <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="543a4985-4a4d-400f-9abe-bc3c5d4a666e" name="Changes" comment="" />
-      <created>1740756196258</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1740756196258</updated>
-      <workItem from="1740756199842" duration="21113000" />
-      <workItem from="1740809542805" duration="43002000" />
-    </task>
-    <servers />
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
-  </component>
+}</component>
 </project>

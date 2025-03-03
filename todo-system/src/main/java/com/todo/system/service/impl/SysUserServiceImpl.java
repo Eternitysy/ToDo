@@ -34,7 +34,7 @@ import com.todo.system.service.ISysUserService;
 /**
  * 用户 业务层处理
  * 
- * @author ruoyi
+ * @author sy
  */
 @Service
 public class SysUserServiceImpl implements ISysUserService
@@ -126,6 +126,28 @@ public class SysUserServiceImpl implements ISysUserService
     public SysUser selectUserById(Long userId)
     {
         return userMapper.selectUserById(userId);
+    }
+
+    /**
+     * 通过用户openID查询用户
+     *
+     * @param openId 用户ID
+     * @return 用户对象信息
+     */
+    @Override
+    public SysUser selectUserByOpenId(String openId) {
+        return userMapper.selectUserByOpenId(openId);
+    }
+
+    /**
+     * 通过用户手机号查询用户
+     *
+     * @param phoneNumber 用户ID
+     * @return 用户对象信息
+     */
+    @Override
+    public SysUser selectUserByPhoneNumber(String phoneNumber) {
+        return userMapper.selectUserByPhoneNumber(phoneNumber);
     }
 
     /**

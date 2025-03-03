@@ -229,6 +229,7 @@
         <module>todo-generator</module>
         <module>todo-common</module>
         <module>todo-task</module>
+        <module>todo-wechat</module>
     </modules>
     <packaging>pom</packaging>
 

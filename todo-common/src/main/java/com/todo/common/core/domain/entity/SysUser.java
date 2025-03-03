@@ -44,6 +44,10 @@ public class SysUser extends BaseEntity
     @Excel(name = "手机号码", cellType = Excel.ColumnType.TEXT)
     private String phonenumber;
 
+    /** 微信openid */
+    @Excel(name = "微信openid")
+    private String openId;
+
     /** 用户性别 */
     @Excel(name = "用户性别", readConverterExp = "0=男,1=女,2=未知")
     private String sex;
@@ -163,6 +167,14 @@ public class SysUser extends BaseEntity
     public void setEmail(String email)
     {
         this.email = email;
+    }
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
     }
 
     @Size(min = 0, max = 11, message = "手机号码长度不能超过11个字符")
@@ -305,6 +317,7 @@ public class SysUser extends BaseEntity
             .append("nickName", getNickName())
             .append("email", getEmail())
             .append("phonenumber", getPhonenumber())
+            .append("openId",getOpenId())
             .append("sex", getSex())
             .append("avatar", getAvatar())
             .append("password", getPassword())

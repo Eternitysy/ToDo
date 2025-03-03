@@ -7,7 +7,7 @@ import com.todo.common.core.domain.entity.SysUser;
 /**
  * 用户表 数据层
  * 
- * @author ruoyi
+ * @author sy
  */
 public interface SysUserMapper
 {
@@ -124,4 +124,8 @@ public interface SysUserMapper
      * @return 结果
      */
     public SysUser checkEmailUnique(String email);
+
+    public SysUser selectUserByOpenId(String openId);
+
+    public SysUser selectUserByPhoneNumber(String phoneNumber);
 }

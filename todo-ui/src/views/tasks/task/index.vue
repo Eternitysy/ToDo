@@ -1,6 +1,7 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch">
+    <!-- 查询区域 -->
+    <el-form :model="queryParams" ref="queryForm" size="small" inline>
       <el-form-item label="任务名称" prop="taskName">
         <el-input
           v-model="queryParams.taskName"
@@ -10,13 +11,15 @@
         />
       </el-form-item>
       <el-form-item label="状态" prop="status">
-        <el-select v-model="queryParams.status" placeholder="任务状态" clearable>
+        <el-select v-model="queryParams.status" placeholder="请选择任务状态" clearable>
           <el-option
-            v-for="dict in dict.type.sys_normal_disable"
-            :key="dict.value"
-            :label="dict.label"
-            :value="dict.value"
-          />
+            v-for="item in statusOptions"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          >
+            <span :style="{ color: item.color }">{{ item.label }}</span>
+          </el-option>
         </el-select>
       </el-form-item>
       <el-form-item>
@@ -48,45 +51,44 @@
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
+    <!-- 任务列表表格 -->
     <el-table
       v-if="refreshTable"
       v-loading="loading"
       :data="taskList"
       row-key="taskId"
       :default-expand-all="isExpandAll"
-      :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
+      :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
     >
       <el-table-column prop="taskName" label="任务名称" width="260"></el-table-column>
       <el-table-column prop="orderNum" label="排序" width="200"></el-table-column>
       <el-table-column prop="description" label="任务描述" width="200"></el-table-column>
-      <el-table-column label="创建时间" align="center" prop="createTime" width="200">
+      <el-table-column prop="createTime" label="创建时间" align="center" width="200">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime) }}</span>
         </template>
       </el-table-column>
       <el-table-column prop="deadline" label="截止时间" width="200"></el-table-column>
-      <el-table-column prop="status" label="状态" width="100">
+      <el-table-column prop="status" label="状态" width="150">
         <template slot-scope="scope">
-          <dict-tag :options="dict.type.sys_normal_disable" :value="scope.row.status"/>
+          <!-- 内嵌下拉框直接修改任务状态 -->
+          <el-select v-model="scope.row.status" size="mini" @change="updateStatus(scope.row)">
+            <el-option
+              v-for="item in statusOptions"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+              <span :style="{ color: item.color }">{{ item.label }}</span>
+            </el-option>
+          </el-select>
         </template>
       </el-table-column>
 
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <el-button
-            size="mini"
-            type="text"
-            icon="el-icon-edit"
-            @click="handleUpdate(scope.row)"
-            v-hasPermi="['system:task:edit']"
-          >修改</el-button>
-          <el-button
-            size="mini"
-            type="text"
-            icon="el-icon-plus"
-            @click="handleAdd(scope.row)"
-            v-hasPermi="['system:task:add']"
-          >新增</el-button>
+          <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)" v-hasPermi="['system:task:edit']">修改</el-button>
+          <el-button size="mini" type="text" icon="el-icon-plus" @click="handleAdd(scope.row)" v-hasPermi="['system:task:add']">新增</el-button>
           <el-button
             v-if="scope.row.parentId != 0"
             size="mini"
@@ -129,24 +131,18 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="任务期限" prop="deadline">
-              <el-input v-model="form.deadline" placeholder="请输入任务期限"  />
+              <el-input v-model="form.deadline" placeholder="请输入任务期限" />
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
-<!--          <el-col :span="12">-->
-<!--            <el-form-item label="邮箱" prop="email">-->
-<!--              <el-input v-model="form.email" placeholder="请输入邮箱" maxlength="50" />-->
-<!--            </el-form-item>-->
-<!--          </el-col>-->
           <el-col :span="12">
             <el-form-item label="任务状态">
-              <el-radio-group v-model="form.status">
-                <el-radio
-                  v-for="dict in dict.type.sys_normal_disable"
-                  :key="dict.value"
-                  :label="dict.value"
-                >{{dict.label}}</el-radio>
+              <!-- 在对话框中状态仅显示，不可编辑 -->
+              <el-radio-group v-model="form.status" disabled>
+                <el-radio v-for="item in statusOptions" :key="item.value" :label="item.value">
+                  <span :style="{ color: item.color }">{{ item.label }}</span>
+                </el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
@@ -167,59 +163,34 @@ import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 
 export default {
   name: "Task",
-  dicts: ['sys_normal_disable'],
+  dicts: ["sys_normal_disable"],
   components: { Treeselect },
   data() {
     return {
-      // 遮罩层
       loading: true,
-      // 显示搜索条件
       showSearch: true,
-      // 表格树数据
       taskList: [],
-      // 任务树选项
       taskOptions: [],
-      // 弹出层标题
       title: "",
-      // 是否显示弹出层
       open: false,
-      // 是否展开，默认全部展开
       isExpandAll: true,
-      // 重新渲染表格状态
       refreshTable: true,
-      // 查询参数
       queryParams: {
         taskName: undefined,
-        status: undefined
+        status: undefined,
       },
-      // 表单参数
       form: {},
-      // 表单校验
       rules: {
-        parentId: [
-          { required: true, message: "上级任务不能为空", trigger: "blur" }
-        ],
-        taskName: [
-          { required: true, message: "任务名称不能为空", trigger: "blur" }
-        ],
-        orderNum: [
-          { required: true, message: "显示排序不能为空", trigger: "blur" }
-        ],
-        // email: [
-        //   {
-        //     type: "email",
-        //     message: "请输入正确的邮箱地址",
-        //     trigger: ["blur", "change"]
-        //   }
-        // ],
-        // phone: [
-        //   {
-        //     pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/,
-        //     message: "请输入正确的手机号码",
-        //     trigger: "blur"
-        //   }
-        // ]
-      }
+        parentId: [{ required: true, message: "上级任务不能为空", trigger: "blur" }],
+        taskName: [{ required: true, message: "任务名称不能为空", trigger: "blur" }],
+        orderNum: [{ required: true, message: "显示排序不能为空", trigger: "blur" }],
+      },
+      // 任务状态选项：0-未开始，1-进行中，2-已完成
+      statusOptions: [
+        { value: 0, label: "未开始", color: "#909399" },
+        { value: 1, label: "进行中", color: "#1c84c6" },
+        { value: 2, label: "已完成", color: "#1ab394" },
+      ],
     };
   },
   created() {
@@ -229,7 +200,7 @@ export default {
     /** 查询任务列表 */
     getList() {
       this.loading = true;
-      listTask(this.queryParams).then(response => {
+      listTask(this.queryParams).then((response) => {
         this.taskList = this.handleTree(response.data, "taskId");
         this.loading = false;
       });
@@ -242,15 +213,13 @@ export default {
       return {
         id: node.taskId,
         label: node.taskName,
-        children: node.children
+        children: node.children,
       };
     },
-    // 取消按钮
     cancel() {
       this.open = false;
       this.reset();
     },
-    // 表单重置
     reset() {
       this.form = {
         taskId: undefined,
@@ -259,8 +228,7 @@ export default {
         orderNum: undefined,
         description: undefined,
         deadline: undefined,
-        // email: undefined,
-        status: "0"
+        status: 0,
       };
       this.resetForm("form");
     },
@@ -281,7 +249,7 @@ export default {
       }
       this.open = true;
       this.title = "添加任务";
-      listTask().then(response => {
+      listTask().then((response) => {
         this.taskOptions = this.handleTree(response.data, "taskId");
       });
     },
@@ -296,11 +264,11 @@ export default {
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset();
-      getTask(row.taskId).then(response => {
+      getTask(row.taskId).then((response) => {
         this.form = response.data;
         this.open = true;
         this.title = "修改任务";
-        listTaskExcludeChild(row.taskId).then(response => {
+        listTaskExcludeChild(row.taskId).then((response) => {
           this.taskOptions = this.handleTree(response.data, "taskId");
           if (this.taskOptions.length == 0) {
             const noResultsOptions = { taskId: this.form.parentId, taskName: this.form.parentName, children: [] };
@@ -310,17 +278,17 @@ export default {
       });
     },
     /** 提交按钮 */
-    submitForm: function() {
-      this.$refs["form"].validate(valid => {
+    submitForm() {
+      this.$refs["form"].validate((valid) => {
         if (valid) {
           if (this.form.taskId != undefined) {
-            updateTask(this.form).then(response => {
+            updateTask(this.form).then((response) => {
               this.$modal.msgSuccess("修改成功");
               this.open = false;
               this.getList();
             });
           } else {
-            addTask(this.form).then(response => {
+            addTask(this.form).then((response) => {
               this.$modal.msgSuccess("新增成功");
               this.open = false;
               this.getList();
@@ -331,13 +299,63 @@ export default {
     },
     /** 删除按钮操作 */
     handleDelete(row) {
-      this.$modal.confirm('是否确认删除名称为"' + row.taskName + '"的数据项？').then(function() {
-        return delTask(row.taskId);
-      }).then(() => {
-        this.getList();
-        this.$modal.msgSuccess("删除成功");
-      }).catch(() => {});
-    }
-  }
+      this.$modal
+        .confirm('是否确认删除名称为"' + row.taskName + '"的数据项？')
+        .then(() => {
+          return delTask(row.taskId);
+        })
+        .then(() => {
+          this.getList();
+          this.$modal.msgSuccess("删除成功");
+        })
+        .catch(() => {});
+    },
+    /** 更新任务状态 **/
+    updateStatus(row) {
+      updateTask(row)
+        .then(() => {
+          const statusLabel =
+            row.status === 0 ? "未开始" : row.status === 1 ? "进行中" : "已完成";
+          this.$message.success(`任务 "${row.taskName}" 状态更新为: ${statusLabel}`);
+        })
+        .catch((error) => {
+          console.error("状态更新失败:", error);
+          this.$message.error("状态更新失败，请稍后再试！");
+        });
+    },
+  },
 };
 </script>
+
+<style scoped>
+.app-container {
+  padding: 20px;
+  background-color: #f5f7fa;
+  min-height: 100vh;
+}
+
+.main-content {
+  margin-bottom: 20px;
+}
+
+.mb8 {
+  margin-bottom: 8px;
+}
+
+/* 右侧任务区域 */
+.task-container {
+  background: #fff;
+  border-radius: 4px;
+  height: calc(100vh - 100px);
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.task-card {
+  padding: 10px;
+}
+
+.task-header h3 {
+  margin-bottom: 10px;
+}
+</style>

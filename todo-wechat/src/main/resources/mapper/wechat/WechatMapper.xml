@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.todo.wechat.mapper.WechatMenuMapper">
+
+	<resultMap type="Menu" id="MenuResult">
+		<id     property="id"     column="id"     />
+		<result property="parentId"   column="parent_id"   />
+		<result property="name"  column="name"   />
+		<result property="type"   column="type"   />
+		<result property="url"   column="url"   />
+		<result property="menu_key"   column="menu_key"   />
+		<result property="sort"   column="sort"   />
+		<result property="isDeleted"    column="is_deleted"    />
+		<result property="parentName" column="parent_name" />
+		<result property="createTime" column="create_time" />
+		<result property="updateTime" column="update_time" />
+	</resultMap>
+    
+    <select id="selectList" resultMap="MenuResult">
+		select t.task_id, t.parent_id, t.ancestors, t.task_name, t.order_num,t.description,t.deadline, t.status,
+			(select task_name from sys_task where task_id = t.parent_id) parent_name
+		from sys_wechat t
+		where t.task_id = #{taskId}
+	</select>
+
+	<select id="getById" resultMap="MenuResult">
+		select t.task_id, t.parent_id, t.ancestors, t.task_name, t.order_num,t.description,t.deadline, t.status,
+			   (select task_name from sys_task where task_id = t.parent_id) parent_name
+		from sys_wechat t
+		where t.task_id = #{taskId}
+	</select>
+
+	<insert id="save" parameterType="Menu">
+		insert into wechat_menu(
+		<if test="id != null and id != 0">id,</if>
+		<if test="parentId != null and parentId != 0">parent_id,</if>
+		<if test="name != null and name != ''">name,</if>
+		<if test="type != null and type != ''">type,</if>
+		<if test="url != null and url !=''">url,</if>
+		<if test="menuKey != null and menuKey != ''">menu_key,</if>
+		<if test="sort != null and sort != ''">sort,</if>
+		create_time
+		)values(
+		<if test="id != null and id != 0">#{id},</if>
+		<if test="parentId != null and parentId != 0">#{parentId},</if>
+		<if test="name != null and name != ''">#{name},</if>
+		<if test="type != null and type != ''">#{type},</if>
+		<if test="url != null and url !=''">#{url},</if>
+		<if test="menuKey != null and menuKey != ''">#{menuKey},</if>
+		<if test="sort != null and sort != ''">#{sort},</if>
+		sysdate()
+		)
+	</insert>
+
+	<update id="updateById">
+		update wechat_menu
+		<set>
+			<if test="id != null and id != 0">id=#{id},</if>
+			<if test="parentId != null and parentId != 0">parentId=#{parentId},</if>
+			<if test="name != null and name != ''">name=#{name},</if>
+			<if test="type != null and type != ''">type=#{type},</if>
+			<if test="url != null and url !=''">url=#{url},</if>
+			<if test="menuKey != null and menuKey != ''">menuKey=#{menuKey},</if>
+			<if test="sort != null and sort != ''">sort=#{sort},</if>
+			update_time = sysdate()
+		</set>
+		where task_id = #{taskId}
+	</update>
+
+	<delete id="removeById">
+		update wehcat_menu set is_deleted = '2' where id = #{id}
+	</delete>
+
+</mapper> 
