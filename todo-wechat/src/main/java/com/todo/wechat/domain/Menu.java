@@ -12,6 +12,9 @@ public class Menu extends BaseEntity {
     @ApiModelProperty(value = "id")
     private Long id;
 
+    @ApiModelProperty(value = "parent_id")
+    private Long parentId;
+
     @ApiModelProperty(value = "名称")
     private String name;
 
@@ -22,8 +25,11 @@ public class Menu extends BaseEntity {
     private String url;
 
     @ApiModelProperty(value = "菜单KEY值，用于消息接口推送")
-    private String meunKey;
+    private String menuKey;
 
     @ApiModelProperty(value = "排序")
     private Integer sort;
+
+    @ApiModelProperty(value = "是否删除")
+    private Integer isDeleted;
 }

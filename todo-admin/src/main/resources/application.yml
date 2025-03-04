@@ -127,3 +127,8 @@ xss:
   excludes: /system/notice
   # 匹配链接
   urlPatterns: /system/*,/monitor/*,/tool/*
+
+# 微信公众号配置
+wechat:
+  mpAppId: wx13db7dcf69bc1223
+  mpAppSecret: de3d7888d30febf84b64d0e6571e4027

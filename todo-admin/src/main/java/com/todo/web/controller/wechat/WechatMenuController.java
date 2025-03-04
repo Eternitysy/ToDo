@@ -22,14 +22,14 @@ import java.util.List;
  */
 @Api(tags = "公众号菜单管理")
 @RestController
-@RequestMapping("/admin/wechat/menu")
+@RequestMapping("/wechat/menu")
 @Slf4j
 public class WechatMenuController {
     @Autowired
     private WechatMenuService menuService;
 
     @ApiOperation(value = "获取")
-    @GetMapping("get/{id}")
+    @GetMapping("list/{id}")
     public AjaxResult get(@PathVariable Long id){
         Menu menu = menuService.getById(id);
         return AjaxResult.success(menu);

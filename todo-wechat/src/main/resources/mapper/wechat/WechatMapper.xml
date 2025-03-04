@@ -10,26 +10,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="name"  column="name"   />
 		<result property="type"   column="type"   />
 		<result property="url"   column="url"   />
-		<result property="menu_key"   column="menu_key"   />
+		<result property="menuKey"   column="menu_key"   />
 		<result property="sort"   column="sort"   />
 		<result property="isDeleted"    column="is_deleted"    />
-		<result property="parentName" column="parent_name" />
 		<result property="createTime" column="create_time" />
 		<result property="updateTime" column="update_time" />
 	</resultMap>
     
     <select id="selectList" resultMap="MenuResult">
-		select t.task_id, t.parent_id, t.ancestors, t.task_name, t.order_num,t.description,t.deadline, t.status,
-			(select task_name from sys_task where task_id = t.parent_id) parent_name
-		from sys_wechat t
-		where t.task_id = #{taskId}
+		select t.id, t.parent_id, t.name, t.sort, t.type,t.url,t.menu_key,t.is_deleted
+		from wechat_menu t
 	</select>
 
 	<select id="getById" resultMap="MenuResult">
-		select t.task_id, t.parent_id, t.ancestors, t.task_name, t.order_num,t.description,t.deadline, t.status,
-			   (select task_name from sys_task where task_id = t.parent_id) parent_name
-		from sys_wechat t
-		where t.task_id = #{taskId}
+		select t.id, t.parent_id, t.name, t.sort, t.type,t.url,t.menu_key,t.is_deleted
+		from wechat_menu t
+		where t.id = #{id}
 	</select>
 
 	<insert id="save" parameterType="Menu">
@@ -58,19 +54,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update wechat_menu
 		<set>
 			<if test="id != null and id != 0">id=#{id},</if>
-			<if test="parentId != null and parentId != 0">parentId=#{parentId},</if>
+			<if test="parentId != null and parentId != 0">parent_id=#{parentId},</if>
 			<if test="name != null and name != ''">name=#{name},</if>
 			<if test="type != null and type != ''">type=#{type},</if>
 			<if test="url != null and url !=''">url=#{url},</if>
-			<if test="menuKey != null and menuKey != ''">menuKey=#{menuKey},</if>
+			<if test="menuKey != null and menuKey != ''">menu_key=#{menuKey},</if>
 			<if test="sort != null and sort != ''">sort=#{sort},</if>
+			<if test="isDeleted != null and sort != ''">is_deleted=#{isDeleted},</if>
 			update_time = sysdate()
 		</set>
 		where task_id = #{taskId}
 	</update>
 
 	<delete id="removeById">
-		update wehcat_menu set is_deleted = '2' where id = #{id}
+		update wehcat_menu set is_deleted = '1' where id = #{id}
 	</delete>
 
 </mapper> 
