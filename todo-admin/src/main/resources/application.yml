@@ -130,5 +130,7 @@ xss:
 
 # 微信公众号配置
 wechat:
-  mpAppId: wx13db7dcf69bc1223
-  mpAppSecret: de3d7888d30febf84b64d0e6571e4027
+  mpAppId: wx70dea41125b5b52c
+  mpAppSecret: 5232aa3b2fbebbda2e5db90a114dbea2
+  # 授权回调获取用户信息接口地址
+  userInfoUrl: http://6d200fad.r22.cpolar.top/todo/wechat/userInfo

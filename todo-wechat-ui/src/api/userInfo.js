@@ -5,7 +5,7 @@ export default {
 
   bindPhone(bindPhoneVo) {
     return request({
-      url: `/admin/wechat/bindPhone`,
+      url: `/todo/wechat/bindPhone`,
       method: 'post',
       data: bindPhoneVo
     })
@@ -13,7 +13,7 @@ export default {
 
   getCurrentUser() {
     return request({
-      url: `/admin/system/sysUser/getCurrentUser/`,
+      url: `/system/user/getCurrentUser/`,
       method: 'get'
     })
   },

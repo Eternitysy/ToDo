@@ -1,20 +1,16 @@
 package com.todo.web.controller.system;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletResponse;
+
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import com.todo.common.annotation.Log;
 import com.todo.common.core.controller.BaseController;
@@ -37,6 +33,7 @@ import com.todo.system.service.ISysUserService;
  * 
  * @author ruoyi
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/system/user")
 public class SysUserController extends BaseController
@@ -252,5 +249,12 @@ public class SysUserController extends BaseController
     public AjaxResult deptTree(SysDept dept)
     {
         return success(deptService.selectDeptTreeList(dept));
+    }
+
+    @ApiOperation(value = "获取当前用户基本信息")
+    @GetMapping("/getCurrentUser")
+    public AjaxResult getCurrentUser() {
+        Map<String, Object> map=userService.getCurrentUser();
+        return success(map);
     }
 }

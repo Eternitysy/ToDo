@@ -1,9 +1,13 @@
 package com.todo.system.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import javax.validation.Validator;
+
+import com.todo.common.core.domain.model.LoginUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -568,5 +572,16 @@ public class SysUserServiceImpl implements ISysUserService
             successMsg.insert(0, "恭喜您，数据已全部导入成功！共 " + successNum + " 条，数据如下：");
         }
         return successMsg.toString();
+    }
+
+    @Override
+    public Map<String, Object> getCurrentUser() {
+        LoginUser loginUser = SecurityUtils.getLoginUser();
+        Long userId = loginUser.getUserId();
+        SysUser sysUser = userMapper.selectUserById(userId);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("name",sysUser.getUserName());
+        map.put("phone",sysUser.getPhonenumber());
+        return map;
     }
 }

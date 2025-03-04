@@ -34,7 +34,7 @@ import static com.todo.common.core.domain.AjaxResult.success;
  */
 @Api(tags = "微信授权登录")
 @Controller
-@RequestMapping("/wechat")
+@RequestMapping("/todo/wechat")
 @CrossOrigin
 public class WechatController {
 
@@ -47,7 +47,7 @@ public class WechatController {
     @Autowired
     private TokenService tokenService;
 
-    //@Value("${wechat.userInfoUrl}")
+    @Value("${wechat.userInfoUrl}")
     private String userInfoUrl;
 
     @ApiOperation(value = "用户授权")
@@ -58,11 +58,12 @@ public class WechatController {
         //buildAuthorizationUrl 三个参数
         // 第一个参数：授权路径，在哪个路径获取微信信息
         // 第二个参数：固定值，授权类型  WxConsts.OAuth2Scope.SNSAPI_USERINFO
-        // 第三个参数：授权成功之后，跳转路径 ‘sy’ 替换成 ‘#’
+        // 第三个参数：授权成功之后，跳转路径 ‘todos’ 替换成 ‘#’
+        System.out.println("绑定？？？？");
         String url = mpService.getOAuth2Service()
                 .buildAuthorizationUrl(userInfoUrl,
                         WxConsts.OAuth2Scope.SNSAPI_USERINFO,
-                        URLEncoder.encode(returnUrl.replace("sy", "#")) );
+                        URLEncoder.encode(returnUrl.replace("todo", "#")) );
         return "redirect:" + url;
     }
 

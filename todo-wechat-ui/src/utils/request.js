@@ -2,7 +2,7 @@ import axios from "axios";
 
 // 创建axios实例
 const service = axios.create({
-  baseURL: "http://eternitysy.free.idcfengye.com", // api 的 base_url
+  baseURL: "http://6d200fad.r22.cpolar.top", // api 的 base_url
   timeout: 30000 // 请求超时时间
 });
 
@@ -23,7 +23,7 @@ service.interceptors.response.use(response => {
       // debugger
       // 替换# 后台获取不到#后面的参数
       let url = window.location.href.replace('#', 'sy')
-      window.location = 'http://eternitysy.free.idcfengye.com/admin/wechat/authorize?returnUrl=' + url
+      window.location = 'http://6d200fad.r22.cpolar.top/todo/wechat/authorize?returnUrl=' + url
     } else {
       if (response.data.code == 200) {
         return response.data;

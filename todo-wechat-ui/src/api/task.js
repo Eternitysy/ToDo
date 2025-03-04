@@ -1,19 +1,12 @@
 import request from '@/utils/request'
 
-const api_name = '/admin/process'
+const api_name = '/tasks/task'
 
 export default {
 
-  findProcessType() {
+  list() {
     return request({
-      url: `${api_name}/findProcessType`,
-      method: 'get'
-    })
-  },
-
-  getProcessTemplate(processTemplateId) {
-    return request({
-      url: `${api_name}/findProcessTemplate/`+processTemplateId,
+      url: `${api_name}/list`,
       method: 'get'
     })
   },

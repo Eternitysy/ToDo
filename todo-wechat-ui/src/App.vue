@@ -5,7 +5,7 @@
 
     <el-dialog title="绑定手机" :visible.sync="dialogVisible" width="80%" >
       <el-form ref="dataForm" :model="bindPhoneVo" size="small">
-        <h4>绑定手机号，与云尚办公系统建立关联</h4>
+        <h4>绑定手机号，与ToDo建立关联</h4>
         <el-form-item label="手机号码">
           <el-input v-model="bindPhoneVo.phone"/>
         </el-form-item>
@@ -58,8 +58,8 @@ export default {
         }
         token = window.localStorage.getItem('token') || '';
         if (token == '') {
-          let url = window.location.href.replace('#', 'sy')
-          window.location = 'http://eternitysy.free.idcfengye.com/admin/wechat/authorize?returnUrl=' + url
+          let url = window.location.href//.replace('#', 'todo')
+          window.location = 'http://6d200fad.r22.cpolar.top/todo/wechat/authorize?returnUrl=' + url
         }
       }
     },
@@ -72,7 +72,7 @@ export default {
       userInfoApi.bindPhone(this.bindPhoneVo).then(response => {
         window.localStorage.setItem('token', response.data);
         this.dialogVisible = false
-        window.location = 'http://787a93c9.r40.cpolar.top'
+        window.location = 'http://eternitysy.ss5.tunnelfrp.com'
       })
     },
 

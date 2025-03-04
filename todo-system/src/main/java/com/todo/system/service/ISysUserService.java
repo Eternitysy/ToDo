@@ -1,6 +1,8 @@
 package com.todo.system.service;
 
 import java.util.List;
+import java.util.Map;
+
 import com.todo.common.core.domain.entity.SysUser;
 
 /**
@@ -219,4 +221,6 @@ public interface ISysUserService
      * @return 结果
      */
     public String importUser(List<SysUser> userList, Boolean isUpdateSupport, String operName);
+
+    Map<String, Object> getCurrentUser();
 }

@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import api from '@/api/process'
+import api from '@/api/task'
 export default {
   name: "process",
 

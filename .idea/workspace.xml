@@ -5,17 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="204245fa-a5c8-4d1c-9024-1c08d7e608a8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/todo-ui/src/api/wechat/menu.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/todo-ui/src/views/wechat/menu/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-admin/src/main/java/com/todo/web/controller/system/SysUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-admin/src/main/java/com/todo/web/controller/system/SysUserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/todo-admin/src/main/java/com/todo/web/controller/wechat/WechatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-admin/src/main/java/com/todo/web/controller/wechat/WechatController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-admin/src/main/java/com/todo/web/controller/wechat/WechatMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-admin/src/main/java/com/todo/web/controller/wechat/WechatMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-admin/src/main/resources/application-ai.yml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/todo-admin/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/todo-admin/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/todo-admin/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/todo-admin/target/classes/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-system/target/classes/mapper/system/SysUserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/todo-system/target/classes/mapper/system/SysUserMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-wechat/src/main/java/com.todo.wechat/service/impl/MessageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-wechat/src/main/java/com.todo.wechat/service/impl/MessageServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-wechat/src/main/java/com/todo/wechat/domain/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-wechat/src/main/java/com/todo/wechat/domain/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-wechat/src/main/resources/mapper/wechat/WechatMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/todo-wechat/src/main/resources/mapper/wechat/WechatMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-framework/src/main/java/com/todo/framework/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-framework/src/main/java/com/todo/framework/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-system/src/main/java/com/todo/system/service/ISysUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-system/src/main/java/com/todo/system/service/ISysUserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-system/src/main/java/com/todo/system/service/impl/SysUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-system/src/main/java/com/todo/system/service/impl/SysUserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-wechat-ui/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-wechat-ui/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/todo-wechat-ui/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-wechat-ui/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/todo-wechat-ui/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-wechat-ui/src/api/process.js" beforeDir="false" afterPath="$PROJECT_DIR$/todo-wechat-ui/src/api/task.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-wechat-ui/src/api/userInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/todo-wechat-ui/src/api/userInfo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-wechat-ui/src/utils/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/todo-wechat-ui/src/utils/request.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-wechat-ui/src/views/apply.vue" beforeDir="false" afterPath="$PROJECT_DIR$/todo-wechat-ui/src/views/apply.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-wechat-ui/src/views/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/todo-wechat-ui/src/views/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-wechat-ui/src/views/list.vue" beforeDir="false" afterPath="$PROJECT_DIR$/todo-wechat-ui/src/views/list.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-wechat-ui/src/views/show.vue" beforeDir="false" afterPath="$PROJECT_DIR$/todo-wechat-ui/src/views/show.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-wechat-ui/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/todo-wechat-ui/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-wechat/src/main/java/com.todo.wechat/service/impl/WechatMenuServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-wechat/src/main/java/com.todo.wechat/service/impl/WechatMenuServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,12 +60,14 @@
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Computer/Java/ToDo/todo-ui/src/api",
+    "last_opened_file_path": "D:/Computer/Java/ToDo/todo-wechat-ui",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "D:\\Computer\\Java\\ToDo\\todo-wechat-ui\\node_modules\\prettier",
+    "run.code.analysis.last.selected.profile": "pProject Default",
     "settings.editor.selected.configurable": "MavenSettings",
     "spring.configuration.checksum": "f07025a3931af782ae064cd0b7311965",
     "vue.rearranger.settings.migration": "true"
@@ -65,11 +75,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Computer\Java\ToDo\todo-wechat-ui" />
       <recent name="D:\Computer\Java\ToDo\todo-ui\src\api" />
       <recent name="D:\Computer\Java\ToDo\todo-ui\src\views" />
       <recent name="D:\Computer\Java\ToDo\todo-wechat\src\main\resources\mapper" />
       <recent name="D:\Computer\Java\ToDo\todo-wechat\src\main\java\com\todo\wechat\domain\vo" />
-      <recent name="D:\Computer\Java\ToDo\todo-wechat\src\main\java\com.todo.wechat\domain" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Computer\Java\ToDo\todo-wechat\src\main\resources\mapper\wechat" />
@@ -112,7 +122,7 @@
       <option name="presentableId" value="Default" />
       <updated>1740995016252</updated>
       <workItem from="1740995017386" duration="9255000" />
-      <workItem from="1741057340989" duration="4919000" />
+      <workItem from="1741057340989" duration="23648000" />
     </task>
     <servers />
   </component>

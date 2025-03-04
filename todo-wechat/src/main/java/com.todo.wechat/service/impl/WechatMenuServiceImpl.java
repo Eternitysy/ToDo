@@ -74,7 +74,7 @@ public class WechatMenuServiceImpl implements WechatMenuService {
             one.put("name", oneMenuVo.getName());
             if(CollectionUtils.isEmpty(oneMenuVo.getChildren())) {
                 one.put("type", oneMenuVo.getType());
-                one.put("url", "http://787a93c9.r40.cpolar.top/#"+oneMenuVo.getUrl());
+                one.put("url", "http://eternitysy.ss5.tunnelfrp.com/#"+oneMenuVo.getUrl());
             } else {
                 JSONArray subButton = new JSONArray();
                 for(MenuVo twoMenuVo : oneMenuVo.getChildren()) {
@@ -83,7 +83,7 @@ public class WechatMenuServiceImpl implements WechatMenuService {
                     if(twoMenuVo.getType().equals("view")) {
                         view.put("name", twoMenuVo.getName());
                         //H5页面地址
-                        view.put("url", "http://787a93c9.r40.cpolar.top#"+twoMenuVo.getUrl());
+                        view.put("url", "http://eternitysy.ss5.tunnelfrp.com#"+twoMenuVo.getUrl());
                     } else {
                         view.put("name", twoMenuVo.getName());
                         view.put("key", twoMenuVo.getMeunKey());

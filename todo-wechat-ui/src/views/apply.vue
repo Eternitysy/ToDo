@@ -1,7 +1,7 @@
 <template>
   <div>
     <van-nav-bar
-      title="发起审批"
+      title="任务列表"
       left-text="返回"
       left-arrow
       @click-left="() => $router.back()"
@@ -17,10 +17,10 @@
 </template>
 
 <script>
-import api from "@/api/process";
+import api from "@/api/task";
 
 export default {
-  name: "process",
+  name: "task",
 
   data() {
     return {
