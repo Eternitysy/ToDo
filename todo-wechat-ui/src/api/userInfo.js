@@ -5,7 +5,7 @@ export default {
 
   bindPhone(bindPhoneVo) {
     return request({
-      url: `/todo/wechat/bindPhone`,
+      url: `/wechat/bindPhone`,
       method: 'post',
       data: bindPhoneVo
     })

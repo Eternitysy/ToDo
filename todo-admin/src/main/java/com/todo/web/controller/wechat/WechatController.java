@@ -34,7 +34,7 @@ import static com.todo.common.core.domain.AjaxResult.success;
  */
 @Api(tags = "微信授权登录")
 @Controller
-@RequestMapping("/todo/wechat")
+@RequestMapping("/wechat")
 @CrossOrigin
 public class WechatController {
 

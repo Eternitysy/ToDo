@@ -45,6 +45,7 @@ export default {
       let token = this.getQueryString('token') || '';
       let openId = this.getQueryString('openId') || '';
       // token === '' && openId != '' 只要这种情况，未绑定账号
+        console.log(token)
       if(token === '' && openId != '') {
         // 绑定账号
         this.bindPhoneVo.openId = openId
@@ -58,8 +59,8 @@ export default {
         }
         token = window.localStorage.getItem('token') || '';
         if (token == '') {
-          let url = window.location.href//.replace('#', 'todo')
-          window.location = 'http://6d200fad.r22.cpolar.top/todo/wechat/authorize?returnUrl=' + url
+          let url = window.location.href.replace('#', 'todo')
+          window.location = 'http://35b03006.r22.cpolar.top/wechat/authorize?returnUrl=' + url
         }
       }
     },
