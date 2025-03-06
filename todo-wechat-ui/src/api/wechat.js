@@ -9,6 +9,6 @@ export function getWeChatAuthUrl() {
 
 // 通过 code 换取 openid
 export async function getOpenId(code) {
-    const res = await axios.get(`/api/wechat/auth?code=${code}`);
+    const res = await axios.get(`/api/todo/wechat/auth?code=${code}`);
     return res.data.openid;
 }

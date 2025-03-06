@@ -236,6 +236,11 @@ public class SysTaskServiceImpl implements ISysTaskService
         return 1;
     }
 
+    @Override
+    public List<SysTask> selectTaskByStatus(String status) {
+        return taskMapper.selectTaskByStatus(status);
+    }
+
     /**
      * 修改保存任务信息
      * 

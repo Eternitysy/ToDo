@@ -13,9 +13,9 @@
       <div class="item">
         <h5>所在部门：{{ user.deptName }}</h5>
       </div>
-      <div class="item">
-        <h5>岗位：{{ user.postName }}</h5>
-      </div>
+<!--      <div class="item">-->
+<!--        <h5>岗位：{{ user.postName }}</h5>-->
+<!--      </div>-->
     </div>
 
   </div>
@@ -39,6 +39,7 @@ export default {
   methods: {
     fetchData() {
       // debugger
+      //let openId = window.localStorage.getItem('openId') || '';
       api.getCurrentUser().then(response => {
         this.user = response.data
       })

@@ -34,7 +34,7 @@ import static com.todo.common.core.domain.AjaxResult.success;
  */
 @Api(tags = "微信授权登录")
 @Controller
-@RequestMapping("/wechat")
+@RequestMapping("/todo/wechat")
 @CrossOrigin
 public class WechatController {
 
@@ -74,11 +74,12 @@ public class WechatController {
         WxOAuth2AccessToken accessToken = mpService.getOAuth2Service().getAccessToken(code);
         String openId = accessToken.getOpenId();
         System.out.println("openId = " + openId);
-
+        BindPhoneVo bindPhoneVo=new BindPhoneVo();
+        bindPhoneVo.setOpenId(openId);
         SysUser user = userService.selectUserByOpenId(openId);
         String token="";
         if(user!=null){
-            LoginUser loginUser= SecurityUtils.getLoginUser();
+            LoginUser loginUser= new LoginUser(user);
             token= tokenService.createToken(loginUser);
         }if(returnUrl.indexOf("?") == -1) {
             return "redirect:" + returnUrl + "?token=" + token + "&openId=" + openId;
@@ -96,7 +97,7 @@ public class WechatController {
         if(user!=null){
             user.setOpenId(bindPhoneVo.getOpenId());
             userService.updateUser(user);
-            LoginUser loginUser= SecurityUtils.getLoginUser();
+            LoginUser loginUser= new LoginUser(user);
             String token= tokenService.createToken(loginUser);
             return success(token);
         }else{

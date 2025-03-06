@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletResponse;
 
+import com.todo.framework.web.service.TokenService;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,6 @@ import com.todo.system.service.ISysUserService;
  * 
  * @author ruoyi
  */
-@CrossOrigin
 @RestController
 @RequestMapping("/system/user")
 public class SysUserController extends BaseController
@@ -49,6 +49,9 @@ public class SysUserController extends BaseController
 
     @Autowired
     private ISysPostService postService;
+
+    @Autowired
+    private TokenService tokenService;
 
     /**
      * 获取用户列表

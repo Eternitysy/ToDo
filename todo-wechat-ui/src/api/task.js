@@ -49,9 +49,9 @@ export default {
     })
   },
 
-  findStarted(page, limit) {
+  findUnStarted(page, limit) {
     return request({
-      url: `${api_name}/findStarted/`+page+`/`+ limit,
+      url: `${api_name}/findUnStarted/`+page+`/`+ limit,
       method: 'get'
     })
   },

@@ -576,12 +576,13 @@ public class SysUserServiceImpl implements ISysUserService
 
     @Override
     public Map<String, Object> getCurrentUser() {
-        LoginUser loginUser = SecurityUtils.getLoginUser();
-        Long userId = loginUser.getUserId();
-        SysUser sysUser = userMapper.selectUserById(userId);
+        String openId="oPr1L7KKxrCz-44wP88GItVbhVSY";
+        System.out.println("username = " + openId);
+        SysUser sysUser = userMapper.selectUserByOpenId(openId);
         HashMap<String, Object> map = new HashMap<>();
         map.put("name",sysUser.getUserName());
         map.put("phone",sysUser.getPhonenumber());
+        map.put("deptName",sysUser.getDept());
         return map;
     }
 }

@@ -146,4 +146,19 @@ public class SysTaskController extends BaseController
         taskService.checkTaskDataScope(taskId);
         return toAjax(taskService.deleteTaskById(taskId));
     }
+
+    @GetMapping("/findUnStarted")
+    public List<SysTask> findUnStarted(@PathVariable("status") String status){
+        return taskService.selectTaskByStatus(status);
+    }
+
+    @GetMapping("/findUnFinished")
+    public List<SysTask> findUnFinished(@PathVariable("status") String status){
+        return taskService.selectTaskByStatus(status);
+    }
+
+    @GetMapping("/findFinished")
+    public List<SysTask> findFinished(@PathVariable("status") String status){
+        return taskService.selectTaskByStatus(status);
+    }
 }

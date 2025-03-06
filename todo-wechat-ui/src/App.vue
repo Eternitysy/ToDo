@@ -60,7 +60,7 @@ export default {
         token = window.localStorage.getItem('token') || '';
         if (token == '') {
           let url = window.location.href.replace('#', 'todo')
-          window.location = 'http://35b03006.r22.cpolar.top/wechat/authorize?returnUrl=' + url
+          window.location = 'http://19baa05b.r20.vip.cpolar.cn/todo/wechat/authorize?returnUrl=' + url
         }
       }
     },

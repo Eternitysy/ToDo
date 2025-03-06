@@ -118,4 +118,6 @@ public interface SysTaskMapper
      * @return 结果
      */
     public int deleteTaskById(Long taskId);
+
+    List<SysTask> selectTaskByStatus(String status);
 }
