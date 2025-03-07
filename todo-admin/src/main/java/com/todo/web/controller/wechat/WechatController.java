@@ -47,6 +47,7 @@ public class WechatController {
     @Autowired
     private TokenService tokenService;
 
+
     @Value("${wechat.userInfoUrl}")
     private String userInfoUrl;
 

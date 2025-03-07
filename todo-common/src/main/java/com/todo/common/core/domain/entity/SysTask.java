@@ -5,6 +5,7 @@ import com.todo.common.annotation.Excel.ColumnType;
 import com.todo.common.core.domain.BaseEntity;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,9 +44,9 @@ public class SysTask extends BaseEntity
     @Excel(name = "任务描述")
     private String description;
 
-    /** 任务期限 */
-    @Excel(name = "任务期限")
-    private String deadline;
+    /** 任务截止日期 */
+    @Excel(name = "任务截止日期")
+    private LocalDate deadline;
 
 
     /** 任务优先级(显示顺序) */

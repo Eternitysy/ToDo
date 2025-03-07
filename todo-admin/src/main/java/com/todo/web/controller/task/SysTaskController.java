@@ -8,6 +8,7 @@ import com.github.pagehelper.PageInfo;
 import com.todo.task.service.ISysTaskService;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,6 +27,8 @@ import com.todo.common.core.domain.entity.SysTask;
 import com.todo.common.enums.BusinessType;
 import com.todo.common.utils.StringUtils;
 
+import static com.todo.common.core.domain.AjaxResult.success;
+
 /**
  * 任务信息
  * 
@@ -37,6 +40,9 @@ public class SysTaskController extends BaseController
 {
     @Autowired
     private ISysTaskService taskService;
+
+//    @Autowired
+//    private MessageService messageService;
 
     /**
      * 获取任务列表
@@ -176,4 +182,19 @@ public class SysTaskController extends BaseController
         List<SysTask> taskList = taskService.selectTaskByStatus(status);
         return new PageInfo<>(taskList);
     }
+
+//    @PostMapping("pushTaskStartedMessage/{userId}/{taskId}")
+//    public AjaxResult pushTaskStartedMessage(@PathVariable Long userId,
+//                                             @PathVariable Long taskId) {
+//        messageService.pushTaskStartedMessage(userId,taskId);
+//        return success();
+//    }
+
+//    @PostMapping("pushTaskUnFinishedMessage/{userId}/{taskId}")
+//    public AjaxResult pushTaskUnFinishedMessage(@PathVariable Long userId,
+//                                                @PathVariable Long taskId) {
+//        System.out.println("开始推送未完成任务");
+//        messageService.pushTaskUnFinishedMessage(userId,taskId);
+//        return success();
+//    }
 }
