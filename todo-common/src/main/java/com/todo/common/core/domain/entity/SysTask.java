@@ -44,10 +44,13 @@ public class SysTask extends BaseEntity
     @Excel(name = "任务描述")
     private String description;
 
+    /** 任务开始日期 */
+    @Excel(name = "任务开始日期")
+    private LocalDate startTime;
+
     /** 任务截止日期 */
     @Excel(name = "任务截止日期")
     private LocalDate deadline;
-
 
     /** 任务优先级(显示顺序) */
     @Excel(name = "任务优先级")

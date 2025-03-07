@@ -68,6 +68,7 @@
           <span>{{ parseTime(scope.row.createTime) }}</span>
         </template>
       </el-table-column>
+      <el-table-column prop="startTime" label="开始时间" width="200"></el-table-column>
       <el-table-column prop="deadline" label="截止时间" width="200"></el-table-column>
       <el-table-column prop="status" label="状态" width="150">
         <template slot-scope="scope">
@@ -127,6 +128,11 @@
           <el-col :span="12">
             <el-form-item label="任务描述" prop="description">
               <el-input v-model="form.description" placeholder="请输入任务描述" maxlength="100" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="任务开始时间" prop="startTime">
+              <el-input v-model="form.startTime" placeholder="请输入任务开始时间" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -227,6 +233,7 @@ export default {
         taskName: undefined,
         orderNum: undefined,
         description: undefined,
+        startTime: undefined,
         deadline: undefined,
         status: 0,
       };

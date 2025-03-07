@@ -66,6 +66,11 @@
               width="90"
             ></el-table-column>
             <el-table-column
+              label="开始日期"
+              prop="startTime"
+              width="160"
+            ></el-table-column>
+            <el-table-column
               label="截止日期"
               prop="deadline"
               width="160"

@@ -68,6 +68,7 @@
       <h3>{{ taskDetail.taskName }}</h3>
       <p><strong>任务描述:</strong> {{ taskDetail.description }}</p>
       <p><strong>优先级:</strong> {{ taskDetail.orderNum }}</p>
+      <p><strong>开始日期:</strong> {{ taskDetail.startTime }}</p>
       <p><strong>截止日期:</strong> {{ taskDetail.deadline }}</p>
       <p><strong>状态:</strong> {{ taskDetail.status }}</p>
       <el-button @click="closeDialog">关闭</el-button>

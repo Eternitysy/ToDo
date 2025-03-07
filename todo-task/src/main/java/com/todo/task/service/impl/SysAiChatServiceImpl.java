@@ -78,7 +78,7 @@ public class SysAiChatServiceImpl implements SysAiChatService {
 
     @Override
     public List<SysTask> generateTask(String message, int maxTokens) {
-        String template = "请根据以下目标任务，拆解成一个详细的任务列表。返回的结果必须是 JSON 格式，每个任务包含以下字段： taskName（任务名称） description（任务描述） orderNum（处理次序，1，2，3）parentId(父级任务id，如果你拆分的任务是同级，则为该目标的id(规定为10)，因为这些任务都是由目标任务的子级,目标任务的父级id为0) ancestors(组级列表，0加上所有的父级id) deadline（截止日期，格式YYYY-MM-DD） 目标任务：";
+        String template = "请根据以下目标任务，拆解成一个详细的任务列表。返回的结果必须是 JSON 格式，每个任务包含以下字段： taskName（任务名称） description（任务描述） orderNum（处理次序，1，2，3）parentId(父级任务id，如果你拆分的任务是同级，则为该目标的id(规定为10)，因为这些任务都是由目标任务的子级,目标任务的父级id为0) ancestors(组级列表，0加上所有的父级id) startTime（任务开始日期，格式YYYY-MM-DD） deadline（截止日期，格式YYYY-MM-DD） 目标任务：";
         String instructions = template+message;
         String result = chat(instructions, maxTokens);
         List<SysTask> taskList = createTaskList(result);
