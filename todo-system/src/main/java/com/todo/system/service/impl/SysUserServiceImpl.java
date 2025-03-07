@@ -582,7 +582,7 @@ public class SysUserServiceImpl implements ISysUserService
         HashMap<String, Object> map = new HashMap<>();
         map.put("name",sysUser.getUserName());
         map.put("phone",sysUser.getPhonenumber());
-        map.put("deptName",sysUser.getDept());
+        map.put("deptName",sysUser.getDept().getDeptName());
         return map;
     }
 }

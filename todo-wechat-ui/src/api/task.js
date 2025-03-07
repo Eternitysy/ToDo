@@ -49,10 +49,24 @@ export default {
     })
   },
 
-  findUnStarted(page, limit) {
+  findUnStarted(status,page, limit) {
     return request({
-      url: `${api_name}/findUnStarted/`+page+`/`+ limit,
-      method: 'get'
+      url: `${api_name}/findUnStarted/`+status+`/`+page+`/`+ limit,
+      method: 'get',
+    })
+  },
+
+  findUnFinished(status,page, limit) {
+    return request({
+      url: `${api_name}/findUnFinished/`+status+`/`+page+`/`+ limit,
+      method: 'get',
+    })
+  },
+
+  findFinished(status,page, limit) {
+    return request({
+      url: `${api_name}/findFinished/`+status+`/`+page+`/`+ limit,
+      method: 'get',
     })
   },
 

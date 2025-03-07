@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <el-button type="primary" icon="el-icon-check" @click="clear()"></el-button>
+<!--    <el-button type="primary" icon="el-icon-check" @click="clear()"></el-button>-->
     <router-view />
 
     <el-dialog title="绑定手机" :visible.sync="dialogVisible" width="80%" >
@@ -60,7 +60,7 @@ export default {
         token = window.localStorage.getItem('token') || '';
         if (token == '') {
           let url = window.location.href.replace('#', 'todo')
-          window.location = 'http://19baa05b.r20.vip.cpolar.cn/todo/wechat/authorize?returnUrl=' + url
+          window.location = 'http://5ca8f11f.r22.cpolar.top/todo/wechat/authorize?returnUrl=' + url
         }
       }
     },

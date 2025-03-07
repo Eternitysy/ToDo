@@ -5,9 +5,9 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
-    name: 'OA审批',
+    name: '任务中心',
     component: () =>
-      import('../views/index.vue'),
+      import('../views/list.vue'),
   },
   {
     path: '/apply/:processTemplateId',
@@ -17,7 +17,7 @@ const routes = [
   },
   {
     path: '/list/:activeIndex',
-    name: '审批列表',
+    name: '任务列表',
     component: () =>
       import('../views/list.vue'),
   },

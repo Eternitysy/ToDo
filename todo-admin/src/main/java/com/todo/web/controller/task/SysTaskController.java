@@ -2,6 +2,9 @@ package com.todo.web.controller.task;
 
 import java.util.List;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.todo.task.service.ISysTaskService;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +41,7 @@ public class SysTaskController extends BaseController
     /**
      * 获取任务列表
      */
-    @PreAuthorize("@ss.hasPermi('tasks:task:list')")
+    //@PreAuthorize("@ss.hasPermi('tasks:task:list')")
     @GetMapping("/list")
     public AjaxResult list(SysTask task)
     {
@@ -147,18 +150,30 @@ public class SysTaskController extends BaseController
         return toAjax(taskService.deleteTaskById(taskId));
     }
 
-    @GetMapping("/findUnStarted")
-    public List<SysTask> findUnStarted(@PathVariable("status") String status){
-        return taskService.selectTaskByStatus(status);
+    @GetMapping("/findUnStarted/{status}/{page}/{limit}")
+    public PageInfo<SysTask> findUnStarted(@PathVariable String status,
+                                           @PathVariable int page,
+                                           @PathVariable int limit){
+        PageHelper.startPage(page,limit);
+        List<SysTask> taskList = taskService.selectTaskByStatus(status);
+        return new PageInfo<>(taskList);
     }
 
-    @GetMapping("/findUnFinished")
-    public List<SysTask> findUnFinished(@PathVariable("status") String status){
-        return taskService.selectTaskByStatus(status);
+    @GetMapping("/findUnFinished/{status}/{page}/{limit}")
+    public PageInfo<SysTask> findUnFinished(@PathVariable String status,
+                                        @PathVariable int page,
+                                        @PathVariable int limit){
+        PageHelper.startPage(page,limit);
+        List<SysTask> taskList = taskService.selectTaskByStatus(status);
+        return new PageInfo<>(taskList);
     }
 
-    @GetMapping("/findFinished")
-    public List<SysTask> findFinished(@PathVariable("status") String status){
-        return taskService.selectTaskByStatus(status);
+    @GetMapping("/findFinished/{status}/{page}/{limit}")
+    public PageInfo<SysTask> findFinished(@PathVariable String status,
+                                      @PathVariable int page,
+                                      @PathVariable int limit){
+        PageHelper.startPage(page,limit);
+        List<SysTask> taskList = taskService.selectTaskByStatus(status);
+        return new PageInfo<>(taskList);
     }
 }
