@@ -1,11 +1,13 @@
 package com.todo.task.service.impl;
 
 import com.todo.common.annotation.DataScope;
+import com.todo.common.constant.CacheConstants;
 import com.todo.common.constant.UserConstants;
 import com.todo.common.core.domain.TreeSelect;
 import com.todo.common.core.domain.entity.SysTask;
 import com.todo.common.core.domain.entity.SysRole;
 import com.todo.common.core.domain.entity.SysUser;
+import com.todo.common.core.redis.RedisCache;
 import com.todo.common.core.text.Convert;
 import com.todo.common.exception.ServiceException;
 import com.todo.common.utils.SecurityUtils;
@@ -15,11 +17,13 @@ import com.todo.system.mapper.SysRoleMapper;
 import com.todo.task.mapper.SysTaskMapper;
 import com.todo.task.service.ISysTaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -35,6 +39,9 @@ public class SysTaskServiceImpl implements ISysTaskService
 
     @Autowired
     private SysRoleMapper roleMapper;
+
+    @Autowired
+    private RedisCache redisCache;
 
     /**
      * 查询任务管理数据
@@ -236,9 +243,29 @@ public class SysTaskServiceImpl implements ISysTaskService
         return 1;
     }
 
+    /**
+     * 微信公众号端不会对数据做修改，因此采用redis缓存数据减少数据库访问次数
+     * @param status
+     * @return
+     */
+
     @Override
     public List<SysTask> selectTaskByStatus(String status) {
-        return taskMapper.selectTaskByStatus(status);
+        String cacheKey= CacheConstants.TASK_CACHE_KEY+"taskList_status_"+status;
+        List<SysTask> cacheTask= redisCache.getCacheList(cacheKey);
+        if(!cacheTask.isEmpty()){
+            return cacheTask;
+        }
+        List<SysTask> taskList = taskMapper.selectTaskByStatus(status);
+        if(!taskList.isEmpty()) {
+//            for (SysTask task : taskList) {
+//                String taskCacheKey = TASK_CACHE_KEY + "task"+task.getTaskId();
+//                redisCache.setCacheObject(taskCacheKey, task, 1, TimeUnit.HOURS);
+//            }
+            // 缓存整个任务列表
+            redisCache.setCacheList(cacheKey, taskList);
+        }
+        return taskList;
     }
 
     /**

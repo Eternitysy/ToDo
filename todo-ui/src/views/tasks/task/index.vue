@@ -37,7 +37,8 @@
           size="mini"
           @click="handleAdd"
           v-hasPermi="['system:task:add']"
-        >新增</el-button>
+        >新增
+        </el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -46,7 +47,8 @@
           icon="el-icon-sort"
           size="mini"
           @click="toggleExpandAll"
-        >展开/折叠</el-button>
+        >展开/折叠
+        </el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
@@ -60,17 +62,17 @@
       :default-expand-all="isExpandAll"
       :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
     >
-      <el-table-column prop="taskName" label="任务名称" width="260"></el-table-column>
-      <el-table-column prop="orderNum" label="排序" width="200"></el-table-column>
-      <el-table-column prop="description" label="任务描述" width="200"></el-table-column>
-      <el-table-column prop="createTime" label="创建时间" align="center" width="200">
+      <el-table-column prop="taskName" label="任务名称" width="200"></el-table-column>
+      <el-table-column prop="orderNum" label="排序" width="100"></el-table-column>
+      <el-table-column prop="description" label="任务描述" width="250"></el-table-column>
+      <el-table-column prop="createTime" label="创建时间" align="center" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime) }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="startTime" label="开始时间" width="200"></el-table-column>
-      <el-table-column prop="deadline" label="截止时间" width="200"></el-table-column>
-      <el-table-column prop="status" label="状态" width="150">
+      <el-table-column prop="startTime" label="开始时间" width="180"></el-table-column>
+      <el-table-column prop="deadline" label="截止时间" width="180"></el-table-column>
+      <el-table-column prop="status" label="状态" width="120">
         <template slot-scope="scope">
           <!-- 内嵌下拉框直接修改任务状态 -->
           <el-select v-model="scope.row.status" size="mini" @change="updateStatus(scope.row)">
@@ -88,8 +90,12 @@
 
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)" v-hasPermi="['system:task:edit']">修改</el-button>
-          <el-button size="mini" type="text" icon="el-icon-plus" @click="handleAdd(scope.row)" v-hasPermi="['system:task:add']">新增</el-button>
+          <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)"
+                     v-hasPermi="['system:task:edit']">修改
+          </el-button>
+          <el-button size="mini" type="text" icon="el-icon-plus" @click="handleAdd(scope.row)"
+                     v-hasPermi="['system:task:add']">新增
+          </el-button>
           <el-button
             v-if="scope.row.parentId != 0"
             size="mini"
@@ -97,7 +103,8 @@
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
             v-hasPermi="['system:task:remove']"
-          >删除</el-button>
+          >删除
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -108,38 +115,42 @@
         <el-row>
           <el-col :span="24" v-if="form.parentId !== 0">
             <el-form-item label="上级任务" prop="parentId">
-              <treeselect v-model="form.parentId" :options="taskOptions" :normalizer="normalizer" placeholder="选择上级任务" />
+              <treeselect v-model="form.parentId" :options="taskOptions" :normalizer="normalizer"
+                          placeholder="选择上级任务"/>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="12">
             <el-form-item label="任务名称" prop="taskName">
-              <el-input v-model="form.taskName" placeholder="请输入任务名称" />
+              <el-input v-model="form.taskName" placeholder="请输入任务名称"/>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="显示排序" prop="orderNum">
-              <el-input-number v-model="form.orderNum" controls-position="right" :min="0" />
+              <el-input-number v-model="form.orderNum" controls-position="right" :min="0"/>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="12">
-            <el-form-item label="任务描述" prop="description">
-              <el-input v-model="form.description" placeholder="请输入任务描述" maxlength="100" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="任务开始时间" prop="startTime">
-              <el-input v-model="form.startTime" placeholder="请输入任务开始时间" />
+            <el-form-item label="开始时间" prop="startTime">
+              <el-input v-model="form.startTime" controls-position="left" placeholder="请输入任务开始时间"/>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="任务期限" prop="deadline">
-              <el-input v-model="form.deadline" placeholder="请输入任务期限" />
+              <el-input v-model="form.deadline" placeholder="请输入任务期限"/>
             </el-form-item>
           </el-col>
+        </el-row>
+        <el-row>
+        <el-col :span="20">
+          <el-form-item label="任务描述" prop="description">
+            <el-input v-model="form.description" type="textarea" placeholder="请输入任务描述"
+                      maxlength="100"/>
+          </el-form-item>
+        </el-col>
         </el-row>
         <el-row>
           <el-col :span="12">
@@ -163,14 +174,14 @@
 </template>
 
 <script>
-import { listTask, getTask, delTask, addTask, updateTask, listTaskExcludeChild } from "@/api/tasks/task";
+import {listTask, getTask, delTask, addTask, updateTask, listTaskExcludeChild} from "@/api/tasks/task";
 import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 
 export default {
   name: "Task",
   dicts: ["sys_normal_disable"],
-  components: { Treeselect },
+  components: {Treeselect},
   data() {
     return {
       loading: true,
@@ -187,15 +198,15 @@ export default {
       },
       form: {},
       rules: {
-        parentId: [{ required: true, message: "上级任务不能为空", trigger: "blur" }],
-        taskName: [{ required: true, message: "任务名称不能为空", trigger: "blur" }],
-        orderNum: [{ required: true, message: "显示排序不能为空", trigger: "blur" }],
+        parentId: [{required: true, message: "上级任务不能为空", trigger: "blur"}],
+        taskName: [{required: true, message: "任务名称不能为空", trigger: "blur"}],
+        orderNum: [{required: true, message: "显示排序不能为空", trigger: "blur"}],
       },
       // 任务状态选项：0-未开始，1-进行中，2-已完成
       statusOptions: [
-        { value: 0, label: "未开始", color: "#909399" },
-        { value: 1, label: "进行中", color: "#1c84c6" },
-        { value: 2, label: "已完成", color: "#1ab394" },
+        {value: 0, label: "未开始", color: "#909399"},
+        {value: 1, label: "进行中", color: "#1c84c6"},
+        {value: 2, label: "已完成", color: "#1ab394"},
       ],
     };
   },
@@ -278,7 +289,7 @@ export default {
         listTaskExcludeChild(row.taskId).then((response) => {
           this.taskOptions = this.handleTree(response.data, "taskId");
           if (this.taskOptions.length == 0) {
-            const noResultsOptions = { taskId: this.form.parentId, taskName: this.form.parentName, children: [] };
+            const noResultsOptions = {taskId: this.form.parentId, taskName: this.form.parentName, children: []};
             this.taskOptions.push(noResultsOptions);
           }
         });
@@ -315,7 +326,8 @@ export default {
           this.getList();
           this.$modal.msgSuccess("删除成功");
         })
-        .catch(() => {});
+        .catch(() => {
+        });
     },
     /** 更新任务状态 **/
     updateStatus(row) {

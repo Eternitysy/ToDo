@@ -43,6 +43,7 @@ public class CacheController
         caches.add(new SysCache(CacheConstants.REPEAT_SUBMIT_KEY, "防重提交"));
         caches.add(new SysCache(CacheConstants.RATE_LIMIT_KEY, "限流处理"));
         caches.add(new SysCache(CacheConstants.PWD_ERR_CNT_KEY, "密码错误次数"));
+        caches.add(new SysCache(CacheConstants.TASK_CACHE_KEY, "任务列表"));
     }
 
     @PreAuthorize("@ss.hasPermi('monitor:cache:list')")

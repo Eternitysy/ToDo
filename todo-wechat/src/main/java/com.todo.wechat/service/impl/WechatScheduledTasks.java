@@ -29,8 +29,10 @@ public class WechatScheduledTasks {
     public void pushTaskStartedMessage() throws WxErrorException {
         List<SysTask> taskList = sysTaskService.selectTaskByStatus("0");
         for(SysTask task:taskList){
-            long day = ChronoUnit.DAYS.between(LocalDate.now(), task.getDeadline());
-            if(day==1){
+            long day = ChronoUnit.DAYS.between(LocalDate.now(), task.getStartTime());
+            if(day==0){
+                task.setStatus("1"); //更新任务状态为进行中
+                sysTaskService.updateTask(task);
                 needPushTaskStartedMessage(task);
             }
         }
