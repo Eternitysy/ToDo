@@ -5,27 +5,51 @@
       <el-col :span="14" class="chat-container">
         <el-card class="chat-card">
           <div class="chat-header">
-            <h2>与AI对话</h2>
+            <h2>智能任务助手</h2>
           </div>
           <!-- 聊天记录区域 -->
           <div class="chat-history" ref="chatHistory">
-            <div
-              v-for="(msg, index) in conversation"
-              :key="index"
-              :class="['chat-message', msg.type]"
-            >
-              <div class="message-content">{{ msg.text }}</div>
+            <transition-group name="message-fade">
+              <div
+                v-for="(msg, index) in conversation"
+                :key="index"
+                :class="['chat-message', msg.type]"
+              >
+                <div class="message-content">
+                  <!-- 流式消息特殊处理 -->
+                  <template v-if="msg.isStreaming">
+                    <span v-html="msg.text"></span>
+                    <span class="stream-cursor"></span>
+                  </template>
+                  <template v-else>
+                    {{ msg.text }}
+                  </template>
+                </div>
+              </div>
+            </transition-group>
+            <div v-if="loading" class="loading-indicator">
+              <i class="el-icon-loading"></i> AI正在思考中...
             </div>
           </div>
-          <!-- 固定在容器底部的聊天输入区域 -->
+          <!-- 输入区域 -->
           <div class="chat-input-container">
             <el-input
               v-model="userQuestion"
-              placeholder="请输入您的问题并按回车发送"
-              @keyup.enter.native="sendChat"
-              clearable
+              placeholder="请输入您的问题，Shift+Enter换行"
+              type="textarea"
+              :rows="2"
+              resize="none"
+              @keyup.enter.native.ctrl="sendChat"
+              :disabled="isProcessing"
             />
-            <el-button type="primary" @click="sendChat">发送</el-button>
+            <el-button
+              type="primary"
+              @click="sendChat"
+              :loading="isProcessing"
+              class="send-button"
+            >
+              发送
+            </el-button>
           </div>
         </el-card>
       </el-col>
@@ -34,47 +58,67 @@
       <el-col :span="10" class="task-container">
         <el-card class="task-card">
           <div class="task-header">
-            <h3>任务拆解</h3>
-            <el-input
-              v-model="goal"
-              placeholder="例如：在30天内完成学习计划"
-              type="textarea"
-              rows="3"
-            />
-            <el-button
-              @click="generateTasks"
-              type="primary"
-              style="margin-top: 10px"
-            >
-              生成任务
-            </el-button>
+            <h3>智能任务拆解</h3>
+            <div class="goal-input">
+              <el-input
+                v-model="goal"
+                placeholder="例如：完成季度销售目标提升30%"
+                type="textarea"
+                :rows="3"
+                show-word-limit
+                maxlength="200"
+              />
+              <el-button
+                type="primary"
+                @click="generateTasks"
+                :loading="taskGenerating"
+                class="generate-button"
+              >
+                <i class="el-icon-magic-stick"></i> 智能拆解
+              </el-button>
+            </div>
           </div>
-          <el-table :data="taskList" style="width: 100%; margin-top: 15px">
+          <el-table
+            :data="taskList"
+            v-loading="taskGenerating"
+            class="task-table"
+            stripe
+          >
+            <el-table-column label="序号" width="60" align="center">
+              <template slot-scope="scope">
+                {{ scope.$index + 1 }}
+              </template>
+            </el-table-column>
             <el-table-column
               label="任务名称"
               prop="taskName"
-              width="100"
+              min-width="100"
             ></el-table-column>
             <el-table-column
               label="任务描述"
-              prop="taskName"
-              width="150"
+              prop="description"
+              min-width="150"
             ></el-table-column>
             <el-table-column
               label="优先级"
               prop="orderNum"
               width="90"
-            ></el-table-column>
+              sortable
+            >
+              <template slot-scope="scope">
+                <el-tag :type="getPriorityTag(scope.row.orderNum)">
+                  {{ scope.row.orderNum }}
+                </el-tag>
+              </template>
+            </el-table-column>
             <el-table-column
-              label="开始日期"
-              prop="startTime"
-              width="160"
-            ></el-table-column>
-            <el-table-column
-              label="截止日期"
-              prop="deadline"
-              width="160"
-            ></el-table-column>
+              label="时间范围"
+              min-width="120"
+            >
+              <template slot-scope="scope">
+                {{ formatDateRange(scope.row) }}
+              </template>
+            </el-table-column>
             <el-table-column label="操作" width="100">
               <template slot-scope="scope">
                 <el-button
@@ -91,10 +135,14 @@
               </template>
             </el-table-column>
           </el-table>
-          <!-- 提交按钮 -->
           <div class="submit-container">
-            <el-button type="success" @click="submitTasks">
-              提交任务
+            <el-button
+              type="success"
+              @click="submitTasks"
+              :disabled="taskList.length === 0"
+              class="submit-button"
+            >
+              <i class="el-icon-upload"></i> 提交任务计划
             </el-button>
           </div>
         </el-card>
@@ -104,60 +152,97 @@
 </template>
 
 <script>
-// 假设已封装好与后端交互的 API 方法，如 generateTask、chat、deleteTask、submitTask 等
-import { generateTask, chat, addTasks } from "@/api/tasks/task";
+import { generateTask, chatStream, addTasks } from "@/api/tasks/task";
 
 export default {
   data() {
     return {
-      goal: "", // 用户输入的目标任务（用于拆解任务）
-      taskList: [], // AI拆解后的任务列表
-      conversation: [], // 聊天记录：每个消息包含 type ('user' 或 'ai') 和 text
-      userQuestion: "", // 用户输入的聊天内容
+      goal: "",
+      taskList: [],
+      conversation: [],
+      userQuestion: "",
+      isProcessing: false,
+      taskGenerating: false,
+      eventSource: null
     };
   },
   methods: {
-    // 调用 AI 接口拆解用户目标，生成任务列表
-    async generateTasks() {
-      if (!this.goal.trim()) {
-        this.$message.warning("请输入目标任务！");
-        return;
-      }
-      // 将用户输入目标加入对话记录
-      this.conversation.push({ type: "user", text: this.goal });
-      try {
-        // 调用 generateTask API，传入用户目标及最大token数
-        this.taskList = await generateTask(this.goal, 500);
-        // 将 AI 拆解结果添加到对话记录
-        this.conversation.push({
-          type: "ai",
-          text: "目标已拆解，任务列表已更新。",
-        });
-        this.scrollChatToBottom();
-      } catch (error) {
-        console.error("任务拆解失败:", error);
-        this.$message.error("任务拆解失败，请稍后再试！");
-      }
-    },
-    // 向 AI 提问（对话功能）
+    // 流式聊天处理
     async sendChat() {
       const question = this.userQuestion.trim();
-      if (!question) {
-        this.$message.warning("请输入问题！");
-        return;
-      }
-      // 将用户问题加入对话记录
-      this.conversation.push({ type: "user", text: question });
+      if (!question || this.isProcessing) return;
+
+      this.isProcessing = true;
+      this.conversation.push({
+        type: "user",
+        text: question,
+        timestamp: new Date().getTime()
+      });
       this.userQuestion = "";
-      this.scrollChatToBottom();
+
       try {
-        const response = await chat(question, 500);
-        // 假设返回结果是纯文本回答
-        this.conversation.push({ type: "ai", text: response });
-        this.scrollChatToBottom();
+        const emitter = await chatStream(question, 500);
+        const aiMessage = {
+          type: "ai",
+          text: "",
+          isStreaming: true,
+          timestamp: new Date().getTime()
+        };
+        this.conversation.push(aiMessage);
+
+        emitter.on('message', (event) => {
+          try {
+            const data = event.data;
+            if (data === '[DONE]') {
+              aiMessage.isStreaming = false;
+              return;
+            }
+            const result = JSON.parse(data);
+            const content = result.choices[0].delta.content || '';
+            aiMessage.text += content;
+          } catch (e) {
+            console.error('解析错误:', e);
+          }
+        });
+
+        emitter.on('complete', () => {
+          this.isProcessing = false;
+          this.scrollChatToBottom();
+        });
+
+        emitter.on('error', (err) => {
+          this.handleError('对话流异常，请检查连接');
+          this.isProcessing = false;
+        });
+
       } catch (error) {
-        console.error("获取AI建议失败:", error);
-        this.$message.error("获取AI建议失败，请稍后再试！");
+        this.handleError('连接服务器失败');
+        this.isProcessing = false;
+      }
+    },
+
+    // 任务生成逻辑
+    async generateTasks() {
+      if (!this.goal.trim()) return;
+
+      this.taskGenerating = true;
+      try {
+        const response = await generateTask(this.goal, 500);
+        this.taskList = response.map(item => ({
+          ...item,
+          startTime: this.formatDate(item.startTime),
+          deadline: this.formatDate(item.deadline)
+        }));
+
+        this.conversation.push({
+          type: "system",
+          text: `已生成${response.length}个子任务`,
+          timestamp: new Date().getTime()
+        });
+      } catch (error) {
+        this.handleError('任务拆解失败');
+      } finally {
+        this.taskGenerating = false;
       }
     },
     // 编辑任务（此处仅示例，具体实现可弹窗或跳转至编辑页面）
@@ -297,5 +382,48 @@ export default {
 .submit-container {
   text-align: center;
   margin-top: 15px;
+}
+.stream-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 1em;
+  background: #67c23a;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.loading-indicator {
+  padding: 10px;
+  text-align: center;
+  color: #909399;
+}
+
+.task-table {
+  margin-top: 15px;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+}
+
+.generate-button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 12px;
+}
+
+.message-fade-enter-active, .message-fade-leave-active {
+  transition: all 0.3s ease;
+}
+.message-fade-enter, .message-fade-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
 }
 </style>

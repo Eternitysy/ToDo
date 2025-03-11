@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="204245fa-a5c8-4d1c-9024-1c08d7e608a8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/todo-admin/src/main/java/com/todo/web/controller/monitor/CacheController.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-admin/src/main/java/com/todo/web/controller/monitor/CacheController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-admin/src/main/java/com/todo/web/controller/task/SysTaskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-admin/src/main/java/com/todo/web/controller/task/SysTaskController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-common/src/main/java/com/todo/common/constant/CacheConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-common/src/main/java/com/todo/common/constant/CacheConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/service/impl/SysTaskServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/service/impl/SysTaskServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-ui/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/todo-ui/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-ui/src/views/tasks/task/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/todo-ui/src/views/tasks/task/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-wechat/src/main/java/com.todo.wechat/service/impl/WechatScheduledTasks.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-wechat/src/main/java/com.todo.wechat/service/impl/WechatScheduledTasks.java" afterDir="false" />
-    </list>
+    <list default="true" id="204245fa-a5c8-4d1c-9024-1c08d7e608a8" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -48,7 +40,7 @@
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Computer/Java/LibraryManagement",
+    "last_opened_file_path": "D:/Computer/Java/ToDo",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -119,6 +111,8 @@
       <workItem from="1741228045119" duration="23805000" />
       <workItem from="1741327498541" duration="28425000" />
       <workItem from="1741358372069" duration="18104000" />
+      <workItem from="1741424690996" duration="5521000" />
+      <workItem from="1741533743990" duration="11826000" />
     </task>
     <servers />
   </component>

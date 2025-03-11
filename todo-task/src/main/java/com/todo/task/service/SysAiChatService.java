@@ -1,6 +1,7 @@
 package com.todo.task.service;
 
 import com.todo.common.core.domain.entity.SysTask;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
  * version: 1.0
  */
 public interface SysAiChatService {
+    SseEmitter chatStream(String message, int maxTokens);
     String chat(String message, int maxTokens);
 
     List<SysTask> generateTask(String message, int maxTokens);

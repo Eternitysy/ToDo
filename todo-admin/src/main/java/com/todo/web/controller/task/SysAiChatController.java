@@ -1,20 +1,13 @@
 package com.todo.web.controller.task;
 
-import cn.hutool.json.JSONUtil;
 import com.todo.common.core.domain.entity.SysTask;
 import com.todo.task.service.SysAiChatService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * className: SysAiChatController
@@ -31,8 +24,8 @@ public class SysAiChatController {
     @Autowired
     private SysAiChatService chatService;
     @PostMapping("/chat")
-    public String chat(@RequestParam String message,@RequestParam(defaultValue = "100") int maxTokens) {
-       return chatService.chat(message,maxTokens);
+    public SseEmitter chat(@RequestParam String message, @RequestParam(defaultValue = "100") int maxTokens) {
+       return chatService.chatStream(message,maxTokens);
     }
 
     @GetMapping("/generateTask")
