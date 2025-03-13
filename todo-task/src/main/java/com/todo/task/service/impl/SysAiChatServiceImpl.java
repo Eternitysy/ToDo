@@ -4,6 +4,7 @@ import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.todo.common.core.domain.entity.SysTask;
+import com.todo.common.utils.StringUtils;
 import com.todo.task.mapper.SysAiChatMapper;
 import com.todo.task.mapper.SysTaskMapper;
 import com.todo.task.service.SysAiChatService;
@@ -91,22 +92,38 @@ public class SysAiChatServiceImpl implements SysAiChatService {
     }
 
     private List<SysTask> createTaskList(String result) {
-        // 去除前后空白以及不必要的包装标记
-        String cleaned = result.trim();
-        // 如果返回结果中包含 markdown 代码块标记，则需要移除它们
-        if (cleaned.startsWith("```json")) {
-            cleaned = cleaned.substring(7).trim(); // 去除 ```json
-        }
-        if (cleaned.endsWith("```")) {
-            cleaned = cleaned.substring(0, cleaned.length() - 3).trim(); // 去除结尾的 ```
-        }
-        if (!cleaned.startsWith("[")) {
-            throw new RuntimeException("返回的内容格式错误，无法解析为JSONArray");
-        }
+        // 预处理
+        String cleaned = preprocessJSON(result);
+        System.out.println("cleaned = " + cleaned);
         JSONArray jsonArray = JSONUtil.parseArray(cleaned);
         List<SysTask> taskList = JSONUtil.toList(jsonArray, SysTask.class);
+        System.out.println("taskList = " + taskList);
         return taskList;
     }
+
+    // JSON预处理方法
+    private String preprocessJSON(String raw) {
+        // 1. 去除首尾无效字符
+        String trimmed = raw.trim()
+                .replaceAll("^[^\\[]*", "")  // 去除JSON数组前的无效字符
+                .replaceAll("[^\\]]*$", ""); // 去除JSON数组后的无效字符
+
+        // 2. 检查括号平衡
+        int openBrackets = StringUtils.countMatches(trimmed, '{');
+        int closeBrackets = StringUtils.countMatches(trimmed, '}');
+        if (openBrackets > closeBrackets) {
+            trimmed += "}".repeat(openBrackets - closeBrackets);
+        }
+        int b = StringUtils.countMatches(trimmed, '[');
+        int c = StringUtils.countMatches(trimmed, ']');
+        if (b > c) {
+            trimmed += "]".repeat(b - c);
+        }
+
+        // 3. 修复未闭合的对象
+        return trimmed.replaceAll("}(\\s*)([^]}]*)$", "}$1]");
+    }
+
 
     @Override
     public String chat(String message, int maxTokens) {

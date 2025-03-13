@@ -86,7 +86,7 @@ export const constantRoutes = [
         meta: { title: '首页', icon: 'dashboard', affix: true }
       },
           {
-            path: 'tasks/ai/chat',
+            path: 'chat',
             component: () => import('@/views/tasks/ai/chat'),
             name: 'aiChat',
             meta: { title: 'Ai问答', icon: 'dashboard', affix: true }

@@ -4,11 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="204245fa-a5c8-4d1c-9024-1c08d7e608a8" name="Changes" comment="" />
+    <list default="true" id="204245fa-a5c8-4d1c-9024-1c08d7e608a8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/todo-admin/src/main/java/com/todo/web/controller/task/DeepSeekController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/domain/DeepSeekRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/domain/DeepSeekResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/service/DeepSeekService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/service/impl/DeepSeekServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-admin/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/todo-admin/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-admin/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/todo-admin/target/classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-common/src/main/java/com/todo/common/constant/CacheConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-common/src/main/java/com/todo/common/constant/CacheConstants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-task/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/todo-task/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/service/impl/SysAiChatServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/service/impl/SysAiChatServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-ui/src/api/tasks/task.js" beforeDir="false" afterPath="$PROJECT_DIR$/todo-ui/src/api/tasks/task.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-ui/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/todo-ui/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-ui/src/views/tasks/ai/chat.vue" beforeDir="false" afterPath="$PROJECT_DIR$/todo-ui/src/views/tasks/ai/chat.vue" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -40,7 +61,7 @@
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Computer/Java/ToDo",
+    "last_opened_file_path": "D:/Computer/Java/ToDo/todo-task/src/main/java/com/todo/task/service/impl",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -58,12 +79,15 @@
     <option name="notificationShown" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.todo.task.service.impl" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Computer\Java\ToDo\todo-task\src\main\java\com\todo\task\service\impl" />
       <recent name="D:\Computer\Java\ToDo\todo-wechat-ui\src\assets" />
       <recent name="D:\Computer\Java\ToDo\todo-wechat-ui\node_modules" />
       <recent name="D:\Computer\Java\ToDo\todo-wechat-ui\src\api" />
       <recent name="D:\Computer\Java\ToDo\todo-wechat-ui\src\views" />
-      <recent name="D:\Computer\Java\ToDo\todo-wechat-ui" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Computer\Java\ToDo\todo-wechat\src\main\resources\mapper\wechat" />
@@ -72,6 +96,9 @@
       <recent name="com.todo.wechat.domain" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.todo.task" />
+      <recent name="com.todo.task.domain" />
+      <recent name="com.todo.task.service" />
       <recent name="com.todo.wechat.mapper" />
     </key>
   </component>
@@ -112,7 +139,8 @@
       <workItem from="1741327498541" duration="28425000" />
       <workItem from="1741358372069" duration="18104000" />
       <workItem from="1741424690996" duration="5521000" />
-      <workItem from="1741533743990" duration="11826000" />
+      <workItem from="1741533743990" duration="15133000" />
+      <workItem from="1741750730403" duration="9913000" />
     </task>
     <servers />
   </component>

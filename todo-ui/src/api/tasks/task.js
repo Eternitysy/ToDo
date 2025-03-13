@@ -76,6 +76,15 @@ export function chat(message,tokenMax) {
     }
   })
 }
+export function chatStream(message) {
+  return request({
+    url: '/deepseekApi/chatStream',
+    method: 'post',
+    params: {
+      message: message,
+    }
+  })
+}
 
 // 调用Ai拆分任务
 export function generateTask(message,tokenMax) {

@@ -46,4 +46,9 @@ public class CacheConstants
      * 任务列表 redis key
      */
     public static final String TASK_CACHE_KEY = "task_list:";
+
+    /**
+     * AI聊天历史记录 redis key
+     */
+    public static final String DEEP_SEEK_CHAT_KEY = "deepSeek_chat_history:";
 }

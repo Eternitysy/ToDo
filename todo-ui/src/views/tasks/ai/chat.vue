@@ -168,58 +168,58 @@ export default {
   },
   methods: {
     // 流式聊天处理
-    async sendChat() {
-      const question = this.userQuestion.trim();
-      if (!question || this.isProcessing) return;
+      async sendChat() {
+        const question = this.userQuestion.trim();
+        if (!question || this.isProcessing) return;
 
-      this.isProcessing = true;
-      this.conversation.push({
-        type: "user",
-        text: question,
-        timestamp: new Date().getTime()
-      });
-      this.userQuestion = "";
-
-      try {
-        const emitter = await chatStream(question, 500);
-        const aiMessage = {
-          type: "ai",
-          text: "",
-          isStreaming: true,
+        this.isProcessing = true;
+        this.conversation.push({
+          type: "user",
+          text: question,
           timestamp: new Date().getTime()
-        };
-        this.conversation.push(aiMessage);
+        });
+        this.userQuestion = "";
 
-        emitter.on('message', (event) => {
-          try {
+        try {
+          const emitter = await chatStream(question);
+          const aiMessage = {
+            type: "ai",
+            text: "",
+            isStreaming: true,
+            timestamp: new Date().getTime()
+          };
+          this.conversation.push(aiMessage);
+
+          // 修改点1：直接使用 event.data 无需 JSON 解析
+          emitter.on('message', (event) => {
             const data = event.data;
+            // 修改点2：检查SSE的data字段是否携带结束标记（按需）
+            // 如果后端没有发送[DONE]，可以删除此判断
             if (data === '[DONE]') {
               aiMessage.isStreaming = false;
               return;
             }
-            const result = JSON.parse(data);
-            const content = result.choices[0].delta.content || '';
-            aiMessage.text += content;
-          } catch (e) {
-            console.error('解析错误:', e);
-          }
-        });
+            aiMessage.text += data; // 直接拼接文本内容
+          });
 
-        emitter.on('complete', () => {
+          // 修改点3：在complete事件中处理结束状态
+          emitter.on('complete', () => {
+            aiMessage.isStreaming = false; // 结束流式显示
+            this.isProcessing = false;
+            this.scrollChatToBottom();
+          });
+
+          emitter.on('error', (err) => {
+            this.handleError('对话流异常，请检查连接');
+            aiMessage.isStreaming = false;
+            this.isProcessing = false;
+          });
+
+        } catch (error) {
+          this.handleError('连接服务器失败');
           this.isProcessing = false;
-          this.scrollChatToBottom();
-        });
-
-        emitter.on('error', (err) => {
-          this.handleError('对话流异常，请检查连接');
-          this.isProcessing = false;
-        });
-
-      } catch (error) {
-        this.handleError('连接服务器失败');
-        this.isProcessing = false;
-      }
-    },
+        }
+      },
 
     // 任务生成逻辑
     async generateTasks() {

@@ -134,3 +134,9 @@ wechat:
   mpAppSecret: 5232aa3b2fbebbda2e5db90a114dbea2
   # 授权回调获取用户信息接口地址
   userInfoUrl: http://667519b.r22.cpolar.top/todo/wechat/userInfo
+
+# DeepSeek配置
+deepSeek:
+  api:
+    key: "sk-1ca6b0f714764820a27e48e5640ac5a4"
+    url: https://api.deepseek.com/chat/completions
