@@ -36,7 +36,7 @@
           icon="el-icon-plus"
           size="mini"
           @click="handleAdd"
-          v-hasPermi="['system:task:add']"
+          v-hasPermi="['tasks:task:add']"
         >新增
         </el-button>
       </el-col>
@@ -91,10 +91,10 @@
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)"
-                     v-hasPermi="['system:task:edit']">修改
+                     v-hasPermi="['tasks:task:edit']">修改
           </el-button>
           <el-button size="mini" type="text" icon="el-icon-plus" @click="handleAdd(scope.row)"
-                     v-hasPermi="['system:task:add']">新增
+                     v-hasPermi="['tasks:task:add']">新增
           </el-button>
           <el-button
             v-if="scope.row.parentId != 0"
@@ -102,7 +102,7 @@
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
-            v-hasPermi="['system:task:remove']"
+            v-hasPermi="['tasks:task:remove']"
           >删除
           </el-button>
         </template>

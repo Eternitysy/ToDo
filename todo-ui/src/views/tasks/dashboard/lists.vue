@@ -103,7 +103,7 @@ export default {
   },
   methods: {
     goToCreatePlan() {
-      this.$router.push('tasks/ai/chat');
+      this.$router.push('tasks/ai');
     },
     goToCreatePlanBySelf(){
       this.$router.push('tasks/task');

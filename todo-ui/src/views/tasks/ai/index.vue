@@ -47,6 +47,7 @@
               @click="sendChat"
               :loading="isProcessing"
               class="send-button"
+              v-hasPermi="['tasks:ai:chatStream']"
             >
               发送
             </el-button>
@@ -168,58 +169,113 @@ export default {
   },
   methods: {
     // 流式聊天处理
-      async sendChat() {
-        const question = this.userQuestion.trim();
-        if (!question || this.isProcessing) return;
+    async sendChat() {
+      if (this.isAIResponding) {
+        this.$message.warning('请等待当前响应完成');
+        return;
+      }
 
-        this.isProcessing = true;
-        this.conversation.push({
-          type: "user",
-          text: question,
-          timestamp: new Date().getTime()
+      const question = this.userQuestion.trim();
+      if (!question) {
+        this.$message.warning("请输入问题！");
+        return;
+      }
+
+      // 添加用户消息
+      this.conversation.push({
+        type: "user",
+        text: question,
+        show: true
+      });
+
+      // 添加初始AI消息
+      this.conversation.push({
+        type: "ai",
+        text: "",
+        loading: true,
+        show: false
+      });
+      this.currentAiMessageIndex = this.conversation.length - 1;
+      this.userQuestion = "";
+      this.isAIResponding = true;
+      this.scrollChatToBottom();
+
+      this.abortController = new AbortController();
+
+      try {
+        const url = `/dev-api/tasks/ai/chatStream?message=${question}`;
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Accept': 'text/event-stream',
+          },
+          signal: this.abortController.signal,
         });
-        this.userQuestion = "";
 
-        try {
-          const emitter = await chatStream(question);
-          const aiMessage = {
-            type: "ai",
-            text: "",
-            isStreaming: true,
-            timestamp: new Date().getTime()
-          };
-          this.conversation.push(aiMessage);
-
-          // 修改点1：直接使用 event.data 无需 JSON 解析
-          emitter.on('message', (event) => {
-            const data = event.data;
-            // 修改点2：检查SSE的data字段是否携带结束标记（按需）
-            // 如果后端没有发送[DONE]，可以删除此判断
-            if (data === '[DONE]') {
-              aiMessage.isStreaming = false;
-              return;
-            }
-            aiMessage.text += data; // 直接拼接文本内容
-          });
-
-          // 修改点3：在complete事件中处理结束状态
-          emitter.on('complete', () => {
-            aiMessage.isStreaming = false; // 结束流式显示
-            this.isProcessing = false;
-            this.scrollChatToBottom();
-          });
-
-          emitter.on('error', (err) => {
-            this.handleError('对话流异常，请检查连接');
-            aiMessage.isStreaming = false;
-            this.isProcessing = false;
-          });
-
-        } catch (error) {
-          this.handleError('连接服务器失败');
-          this.isProcessing = false;
+        if (!response.ok) {
+          throw new Error(`请求失败，状态码：${response.status}`);
         }
-      },
+
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = '';
+
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+
+          buffer += decoder.decode(value, { stream: true });
+
+          // 处理完整的事件（以\n\n分隔）
+          let eventEndIndex;
+          while ((eventEndIndex = buffer.indexOf('\n\n')) !== -1) {
+            const eventStr = buffer.substring(0, eventEndIndex);
+            buffer = buffer.substring(eventEndIndex + 2);
+
+            // 解析事件数据
+            let data = '';
+            eventStr.split('\n').forEach(line => {
+              if (line.startsWith('data:')) {
+                data += line.slice(5).trim() + '\n';
+              }
+            });
+            data = data.trimEnd();
+
+            if (data === '[DONE]') {
+              break;
+            }
+
+            if (data) {
+              this.updateAiMessage(data);
+            }
+          }
+        }
+      } catch (error) {
+        if (error.name !== 'AbortError') {
+          console.error('请求失败:', error);
+          this.$message.error('请求失败: ' + error.message);
+          this.conversation[this.currentAiMessageIndex].text = '响应获取失败，请重试';
+        }
+      } finally {
+        this.isAIResponding = false;
+        if (this.conversation[this.currentAiMessageIndex]) {
+          this.conversation[this.currentAiMessageIndex].loading = false;
+        }
+        this.abortController = null;
+        this.scrollChatToBottom();
+      }
+    },
+
+// 移除parseSSEEvent方法（已整合到主流程）
+
+    updateAiMessage(content) {
+      const currentMsg = this.conversation[this.currentAiMessageIndex];
+      this.$set(this.conversation, this.currentAiMessageIndex, {
+        ...currentMsg,
+        text: currentMsg.text + content
+      });
+      this.scrollChatToBottom();
+    },
 
     // 任务生成逻辑
     async generateTasks() {

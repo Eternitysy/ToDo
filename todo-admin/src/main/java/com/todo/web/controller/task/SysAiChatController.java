@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-@RequestMapping("/tasks/ai")
+@RequestMapping("/tasks/ais")
 public class SysAiChatController {
     @Autowired
     private SysAiChatService chatService;

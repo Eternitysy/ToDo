@@ -4,27 +4,27 @@ import com.todo.common.core.controller.BaseController;
 import com.todo.task.service.DeepSeekService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.io.IOException;
 import java.util.logging.Logger;
 
+@CrossOrigin
 @RestController
-@RequestMapping("/deepseekApi")
+@RequestMapping("/tasks/ai")
 public class DeepSeekController extends BaseController {
     private static final Logger logger = Logger.getLogger(DeepSeekController.class.getName());
 
     @Autowired
     private DeepSeekService deepSeekService;
 
+    //@PreAuthorize("@ss.hasPermi('tasks:ai:chatStream')")
     @PostMapping(value = "/chatStream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public SseEmitter chatStream(@RequestParam String message) {
         SseEmitter emitter = new SseEmitter(180000L);
-        Long userId = getUserId();
+        Long userId = 1L;
         try {
             logger.info("开始处理userId的请求： " + userId + ", message: " + message);
             deepSeekService.callDeepSeekStream(userId, message)
@@ -64,7 +64,6 @@ public class DeepSeekController extends BaseController {
                 emitter.complete();
             }
         }
-
         return emitter;
     }
 

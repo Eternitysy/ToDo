@@ -82,7 +82,10 @@ export function chatStream(message) {
     method: 'post',
     params: {
       message: message,
-    }
+    },
+    headers: {
+      'Accept': 'text/event-stream',
+    },
   })
 }
 

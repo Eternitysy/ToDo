@@ -5,19 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="204245fa-a5c8-4d1c-9024-1c08d7e608a8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/todo-admin/src/main/java/com/todo/web/controller/task/DeepSeekController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/domain/DeepSeekRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/domain/DeepSeekResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/service/DeepSeekService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/service/impl/DeepSeekServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-admin/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/todo-admin/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-admin/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/todo-admin/target/classes/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-common/src/main/java/com/todo/common/constant/CacheConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-common/src/main/java/com/todo/common/constant/CacheConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-task/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/todo-task/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/service/impl/SysAiChatServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/service/impl/SysAiChatServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todo-ui/src/views/tasks/ai/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-admin/src/main/java/com/todo/web/controller/task/DeepSeekController.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-admin/src/main/java/com/todo/web/controller/task/DeepSeekController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-admin/src/main/java/com/todo/web/controller/task/SysAiChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-admin/src/main/java/com/todo/web/controller/task/SysAiChatController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-framework/src/main/java/com/todo/framework/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-framework/src/main/java/com/todo/framework/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-ui/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/todo-ui/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/todo-ui/src/api/tasks/task.js" beforeDir="false" afterPath="$PROJECT_DIR$/todo-ui/src/api/tasks/task.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/todo-ui/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/todo-ui/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-ui/src/views/tasks/ai/chat.vue" beforeDir="false" afterPath="$PROJECT_DIR$/todo-ui/src/views/tasks/ai/chat.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-ui/src/views/system/task/task.vue" beforeDir="false" afterPath="$PROJECT_DIR$/todo-ui/src/views/system/task/task.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-ui/src/views/tasks/ai/chat.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-ui/src/views/tasks/dashboard/lists.vue" beforeDir="false" afterPath="$PROJECT_DIR$/todo-ui/src/views/tasks/dashboard/lists.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-ui/src/views/tasks/task/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/todo-ui/src/views/tasks/task/index.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,28 +51,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Computer/Java/ToDo/todo-task/src/main/java/com/todo/task/service/impl",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "prettierjs.PrettierConfiguration.Package": "D:\\Computer\\Java\\ToDo\\todo-wechat-ui\\node_modules\\prettier",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "MavenSettings",
-    "spring.configuration.checksum": "f07025a3931af782ae064cd0b7311965",
-    "ts.external.directory.path": "E:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.1\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Computer/Java/ToDo/todo-task/src/main/java/com/todo/task/service/impl&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;D:\\Computer\\Java\\ToDo\\todo-wechat-ui\\node_modules\\prettier&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;f07025a3931af782ae064cd0b7311965&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;E:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.1\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -140,7 +138,8 @@
       <workItem from="1741358372069" duration="18104000" />
       <workItem from="1741424690996" duration="5521000" />
       <workItem from="1741533743990" duration="15133000" />
-      <workItem from="1741750730403" duration="9913000" />
+      <workItem from="1741750730403" duration="14182000" />
+      <workItem from="1741957505194" duration="16426000" />
     </task>
     <servers />
   </component>
