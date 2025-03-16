@@ -26,40 +26,55 @@
             </el-col>
           </el-row>
         </el-card>
-        <div class="button-container" style="padding-top: 15px">
+        <div class="button-container" style="padding-top: 3px">
           <el-button @click="goToCreatePlan" type="primary">Ai智能制定计划</el-button>
-          <el-button @click="goToCreatePlanBySelf" type="primary">个人手动制定计划</el-button>
+          <el-button @click="goToCreatePlanBySelf" type="success" style="margin-left: 40px">个人手动制定计划</el-button>
         </div>
+        <!-- 任务日历 -->
+        <el-card style="margin-top: 30px">
+          <div class="calendar-container custom-calendar">
+            <h3>任务日历</h3>
+            <el-calendar v-model="selectedDate">
+              <template slot="dateCell" slot-scope="{ data }">
+                <div class="date-cell" @click="showTaskDetail(data)">
+                  <p class="cell-day">{{ data.day.split("-").slice(2).join() }}</p>
+                  <span v-if="hasTask(data.day)" class="dot"></span>
+                </div>
+              </template>
+            </el-calendar>
+          </div>
+        </el-card>
       </el-col>
 
       <!-- 右侧任务预览与日历 -->
       <el-col :span="13">
-        <el-card>
-          <h3>近期任务预览</h3>
-          <el-table :data="recentTasksList" style="width: 100%">
-            <el-table-column prop="taskName" label="任务名称" style="width: 40%"></el-table-column>
-            <el-table-column prop="orderNum" label="排序" style="width: 15%"></el-table-column>
-            <el-table-column prop="deadline" label="截止时间" style="width: 30%"></el-table-column>
-            <el-table-column label="状态" style="width: 15%">
-              <template slot-scope="scope">
-                <span>{{ scope.row.status }}</span>
-              </template>
-            </el-table-column>
-          </el-table>
-        </el-card>
-
-        <!-- 任务日历 -->
-        <div class="calendar-container custom-calendar">
-          <h3 style="margin-top: 30px;">任务日历</h3>
-          <el-calendar v-model="selectedDate">
-            <template slot="dateCell" slot-scope="{ data }">
-              <div class="date-cell" @click="showTaskDetail(data)">
-                <p class="cell-day">{{ data.day.split("-").slice(2).join()}}</p>
-                <span v-if="hasTask(data.day)" class="dot"></span>
+        <!-- 在右侧el-col内添加时间模块 -->
+        <el-col :xl="14" :lg="24" :md="24" :sm="24" class="right-panel">
+          <!-- 新增时间显示卡片 -->
+          <el-card class="time-card" shadow="never" style="height: 220px">
+            <div class="time-container">
+              <div class="time-content">
+                <span class="date">{{ currentDate }}</span>
+                <span class="time">{{ currentTime }}</span>
+                <span class="week">{{ currentWeek }}</span>
               </div>
-            </template>
-          </el-calendar>
-        </div>
+              <i class="el-icon-alarm-clock clock-icon"></i>
+            </div>
+          </el-card>
+          <el-card style="margin-top: 90px">
+            <h3>近期任务预览</h3>
+            <el-table :data="recentTasksList" style="width: 100%">
+              <el-table-column prop="taskName" label="任务名称" style="width: 40%"></el-table-column>
+              <el-table-column prop="orderNum" label="排序" style="width: 15%"></el-table-column>
+              <el-table-column prop="deadline" label="截止时间" style="width: 30%"></el-table-column>
+              <el-table-column label="状态" style="width: 15%">
+                <template slot-scope="scope">
+                  <span>{{ scope.row.status }}</span>
+                </template>
+              </el-table-column>
+            </el-table>
+          </el-card>
+        </el-col>
       </el-col>
     </el-row>
 
@@ -77,11 +92,15 @@
 </template>
 
 <script>
-import { listTask } from "@/api/tasks/task";
+import {listTask} from "@/api/tasks/task";
 
 export default {
   data() {
     return {
+      currentTime: '',
+      currentDate: '',
+      currentWeek: '',
+      timer: null,
       tasksCount: {
         pending: 0,
         inProgress: 0,
@@ -101,11 +120,29 @@ export default {
   created() {
     this.getTaskList();
   },
+  mounted() {
+    this.updateTime()
+    this.timer = setInterval(this.updateTime, 1000)
+  },
+
+  beforeDestroy() {
+    if (this.timer) {
+      clearInterval(this.timer)
+    }
+  },
+
   methods: {
+    updateTime() {
+      const now = new Date()
+      this.currentTime = this.formatDateTime(now, 'HH:mm:ss')
+      this.currentDate = this.formatDateTime(now, 'YYYY年MM月DD日')
+      // this.currentWeek = formatDateTime(now, 'WW')
+      this.currentWeek = '星期' + ['日', '一', '二', '三', '四', '五', '六'][now.getDay()]
+    },
     goToCreatePlan() {
       this.$router.push('tasks/ai');
     },
-    goToCreatePlanBySelf(){
+    goToCreatePlanBySelf() {
       this.$router.push('tasks/task');
     },
     // 获取任务列表，并手动处理为最高父级任务数组
@@ -140,6 +177,36 @@ export default {
       if (day.length < 2) day = '0' + day;
       return `${year}-${month}-${day}`;
     },
+    // 时间日期格式化工具函数
+    formatDateTime(date = new Date(), format = 'YYYY-MM-DD HH:mm:ss') {
+      // 补零函数
+      const padZero = num => num.toString().padStart(2, '0')
+
+      // 星期映射
+      const weekMap = ['日', '一', '二', '三', '四', '五', '六']
+
+      // 提取时间组件
+      const year = date.getFullYear()
+      const month = padZero(date.getMonth() + 1)
+      const day = padZero(date.getDate())
+      const hours = padZero(date.getHours())
+      const minutes = padZero(date.getMinutes())
+      const seconds = padZero(date.getSeconds())
+      const week = weekMap[date.getDay()]
+
+      // 替换格式标记
+      return format
+        .replace(/YYYY/g, year)
+        .replace(/MM/g, month)
+        .replace(/DD/g, day)
+        .replace(/HH/g, hours)
+        .replace(/mm/g, minutes)
+        .replace(/ss/g, seconds)
+        .replace(/WW/g, `星期${week}`)
+        .replace(/W/g, week)
+    },
+
+
     // 判断指定日期是否有任务
     hasTask(dateStr) {
       return this.calendarTaskDates.includes(dateStr);
@@ -191,12 +258,12 @@ export default {
 }
 
 .calendar-container {
-  margin-top: 30px;
   text-align: center;
+  height: 295px;
 }
 
 .custom-calendar ::v-deep .el-calendar-table .el-calendar-day {
-  height: 40px !important;
+  height: 26px !important;
   position: relative;
 }
 
@@ -206,7 +273,7 @@ export default {
 }
 
 .cell-day {
-  font-size: 13px;
+  font-size: 10px;
   font-weight: bold;
   margin: 0;
   text-align: center;
@@ -214,14 +281,57 @@ export default {
 
 /* 圆点标记 */
 .dot {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   background-color: #ff4d51;
   border-radius: 50%;
   display: inline-block;
   position: absolute;
-  top: 20px;
+  top: 11px;
   left: 50%;
   transform: translateX(-50%);
 }
+
+.time-card {
+  margin-bottom: 24px;
+  background: linear-gradient(135deg, #accfec, #bde8a3);
+  color: white;
+
+  .time-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+
+    .time-content {
+      display: flex;
+      flex-direction: column;
+
+      .date {
+        font-size: 32px;
+        margin-bottom: 8px;
+      }
+
+      .time {
+        font-size: 50px;
+        font-weight: bold;
+        letter-spacing: 2px;
+      }
+
+      .week {
+        font-size: 30px;
+        margin-top: 8px;
+        opacity: 0.9;
+      }
+    }
+
+    .clock-icon {
+      font-size: 100px;
+      opacity: 0.5;
+      margin-left: 30px;
+      color: #1B1F22;
+    }
+  }
+}
+
 </style>

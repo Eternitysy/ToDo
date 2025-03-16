@@ -5,17 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="204245fa-a5c8-4d1c-9024-1c08d7e608a8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/readmeImages/wechat-task-list.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readmeImages/wechat-task-message.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readmeImages/ai.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readmeImages/cacheList.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readmeImages/cacheMonitor.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readmeImages/index.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readmeImages/itself.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readmeImages/log.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readmeImages/taskList.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-admin/src/main/java/com/todo/web/controller/task/DeepSeekController.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-admin/src/main/java/com/todo/web/controller/task/DeepSeekController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-admin/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/todo-admin/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-admin/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/todo-admin/target/classes/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/service/DeepSeekService.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/service/DeepSeekService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readmeImages/wechat-task-list.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/readmeImages/wechat-task-list.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readmeImages/wechat-task-message.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/readmeImages/wechat-task-message.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/service/impl/DeepSeekServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo-task/src/main/java/com/todo/task/service/impl/DeepSeekServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-task/src/main/resources/mapper/task/SysTaskMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/todo-task/src/main/resources/mapper/task/SysTaskMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-wechat-ui/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/todo-wechat-ui/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo-wechat-ui/src/utils/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/todo-wechat-ui/src/utils/request.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-ui/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/todo-ui/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-ui/src/views/tasks/ai/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/todo-ui/src/views/tasks/ai/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo-ui/src/views/tasks/dashboard/lists.vue" beforeDir="false" afterPath="$PROJECT_DIR$/todo-ui/src/views/tasks/dashboard/lists.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +62,7 @@
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Computer/Java/ToDo/README-images",
+    "last_opened_file_path": "D:/Computer/Java/ToDo/readmeImages",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -81,11 +84,11 @@
       <recent name="com.todo.task.service.impl" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Computer\Java\ToDo\readmeImages" />
       <recent name="D:\Computer\Java\ToDo\README-images" />
       <recent name="D:\Computer\Java\ToDo\todo-task\src\main\java\com\todo\task\service\impl" />
       <recent name="D:\Computer\Java\ToDo\todo-wechat-ui\src\assets" />
       <recent name="D:\Computer\Java\ToDo\todo-wechat-ui\node_modules" />
-      <recent name="D:\Computer\Java\ToDo\todo-wechat-ui\src\api" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Computer\Java\ToDo\todo-wechat\src\main\resources\mapper\wechat" />
@@ -140,7 +143,7 @@
       <workItem from="1741533743990" duration="15133000" />
       <workItem from="1741750730403" duration="14182000" />
       <workItem from="1741957505194" duration="17046000" />
-      <workItem from="1742134243007" duration="5461000" />
+      <workItem from="1742134243007" duration="16377000" />
     </task>
     <servers />
   </component>

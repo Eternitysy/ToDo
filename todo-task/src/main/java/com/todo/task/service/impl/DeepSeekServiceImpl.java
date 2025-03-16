@@ -116,7 +116,8 @@ public class DeepSeekServiceImpl implements DeepSeekService {
         String chatKey = getChatKey(userId);
 
         // 获取或初始化用户的对话历史
-        Object object = redisCache.getCacheObject(chatKey);
+        //Object object = redisCache.getCacheObject(chatKey);
+        Object object = null;
         List<DeepSeekRequest.Message> messages = Objects.isNull(object) ? new ArrayList<>() : (List<DeepSeekRequest.Message>) object;
 
         // 添加新的用户消息到对话历史

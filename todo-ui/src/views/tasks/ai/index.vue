@@ -31,28 +31,30 @@
               <i class="el-icon-loading"></i> AI正在思考中...
             </div>
           </div>
-          <!-- 输入区域 -->
-          <div class="chat-input-container">
-            <el-input
-              v-model="userQuestion"
-              placeholder="请输入您的问题，Shift+Enter换行"
-              type="textarea"
-              :rows="2"
-              resize="none"
-              @keyup.enter.native.ctrl="sendChat"
-              :disabled="isProcessing"
-            />
-            <el-button
-              type="primary"
-              @click="sendChat"
-              :loading="isProcessing"
-              class="send-button"
-              v-hasPermi="['tasks:ai:chatStream']"
-            >
-              发送
-            </el-button>
-          </div>
+
         </el-card>
+        <!-- 输入区域 -->
+        <div class="chat-input-container">
+          <el-input
+            v-model="userQuestion"
+            placeholder="请输入您的问题，Shift+Enter换行"
+            type="textarea"
+            :rows="2"
+            resize="none"
+            @keyup.enter.native.ctrl="sendChat"
+            :disabled="isProcessing"
+          />
+          <el-button
+            type="primary"
+            @click="sendChat"
+            :loading="isProcessing"
+            class="send-button"
+            v-hasPermi="['tasks:ai:chatStream']"
+            style="margin-left: 5px"
+          >
+            发送
+          </el-button>
+        </div>
       </el-col>
 
       <!-- 右侧任务拆解区域 -->
@@ -72,54 +74,33 @@
               <el-button
                 type="primary"
                 @click="generateTasks"
-                :loading="taskGenerating"
                 class="generate-button"
               >
                 <i class="el-icon-magic-stick"></i> 智能拆解
               </el-button>
             </div>
           </div>
-          <el-table
-            :data="taskList"
-            v-loading="taskGenerating"
-            class="task-table"
-            stripe
-          >
-            <el-table-column label="序号" width="60" align="center">
-              <template slot-scope="scope">
-                {{ scope.$index + 1 }}
-              </template>
-            </el-table-column>
+          <el-table :data="taskList" style="width: 100%; margin-top: 10px">
             <el-table-column
               label="任务名称"
               prop="taskName"
-              min-width="100"
+              width="150"
             ></el-table-column>
             <el-table-column
               label="任务描述"
-              prop="description"
-              min-width="150"
+              prop="taskName"
+              width="160"
             ></el-table-column>
             <el-table-column
               label="优先级"
               prop="orderNum"
-              width="90"
-              sortable
-            >
-              <template slot-scope="scope">
-                <el-tag :type="getPriorityTag(scope.row.orderNum)">
-                  {{ scope.row.orderNum }}
-                </el-tag>
-              </template>
-            </el-table-column>
+              width="50"
+            ></el-table-column>
             <el-table-column
-              label="时间范围"
-              min-width="120"
-            >
-              <template slot-scope="scope">
-                {{ formatDateRange(scope.row) }}
-              </template>
-            </el-table-column>
+              label="截止日期"
+              prop="deadline"
+              width="100"
+            ></el-table-column>
             <el-table-column label="操作" width="100">
               <template slot-scope="scope">
                 <el-button
@@ -283,22 +264,15 @@ export default {
 
       this.taskGenerating = true;
       try {
-        const response = await generateTask(this.goal, 500);
-        this.taskList = response.map(item => ({
-          ...item,
-          startTime: this.formatDate(item.startTime),
-          deadline: this.formatDate(item.deadline)
-        }));
-
+        this.taskList = await generateTask(this.goal, 500);
         this.conversation.push({
-          type: "system",
-          text: `已生成${response.length}个子任务`,
-          timestamp: new Date().getTime()
+          type: "aiTask",
+          text: "目标已拆解，任务列表已更新。",
         });
+        this.scrollChatToBottom();
       } catch (error) {
-        this.handleError('任务拆解失败');
-      } finally {
-        this.taskGenerating = false;
+        console.error("任务拆解失败:", error);
+        this.$message.error("任务拆解失败，请稍后再试！");
       }
     },
     // 编辑任务（此处仅示例，具体实现可弹窗或跳转至编辑页面）
@@ -402,11 +376,17 @@ export default {
   color: #67c23a;
 }
 
+.chat-message.aiTask {
+  text-align: left;
+  background-color: #f9f2eb;
+  color: #eea04a;
+}
+
 /* 固定在聊天区域底部的输入区域 */
 .chat-input-container {
   padding-bottom: 10px;
   background-color: #fff;
-  border-top: 1px solid #ebeef5;
+  border-bottom: 5px solid #ebeef5;
   display: flex;
   align-items: center;
 }
@@ -454,13 +434,6 @@ export default {
   padding: 10px;
   text-align: center;
   color: #909399;
-}
-
-.task-table {
-  margin-top: 15px;
-  border-radius: 4px;
-  overflow: hidden;
-  box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
 }
 
 .generate-button {
