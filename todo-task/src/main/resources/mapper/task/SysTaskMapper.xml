@@ -100,7 +100,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="startTime != null and startTime != ''">start_time,</if>
  			<if test="deadline != null and deadline != ''">deadline,</if>
  			<if test="status != null">status,</if>
- 			create_time
+ 			create_time,
+ 			deadline,
+			start_time
  		)values(
  			<if test="taskId != null and taskId != 0">#{taskId},</if>
  			<if test="parentId != null and parentId != 0">#{parentId},</if>
@@ -108,10 +110,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="ancestors != null and ancestors != ''">#{ancestors},</if>
  			<if test="orderNum != null">#{orderNum},</if>
  			<if test="description != null and description != ''">#{description},</if>
- 			<if test="startTime != null and startTime != ''">#{startTime},</if>
- 			<if test="deadline != null and deadline != ''">#{deadline},</if>
+<!-- 			<if test="startTime != null and startTime != ''">#{startTime},</if>-->
+<!-- 			<if test="deadline != null and deadline != ''">#{deadline},</if>-->
  			<if test="status != null">#{status},</if>
- 			sysdate()
+ 			sysdate(),
+			#{deadline},
+			#{startTime}
  		)
 	</insert>
 	
@@ -123,10 +127,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="ancestors != null and ancestors != ''">ancestors = #{ancestors},</if>
  			<if test="orderNum != null">order_num = #{orderNum},</if>
 			<if test="description != null and description != ''">description = #{description},</if>
-			<if test="startTime != null and startTime != ''">start_time = #{startTime},</if>
-			<if test="deadline != null and deadline != ''">deadline = #{deadline},</if>
+<!--			<if test="startTime != null and startTime != ''">start_time = #{startTime},</if>-->
+<!--			<if test="deadline != null and deadline != ''">deadline = #{deadline},</if>-->
  			<if test="status != null and status != ''">status = #{status},</if>
- 			update_time = sysdate()
+ 			update_time = sysdate(),
+			start_time = #{startTime},
+			deadline = #{deadline}
  		</set>
  		where task_id = #{taskId}
 	</update>

@@ -35,7 +35,7 @@
           <div class="chat-input-container">
             <el-input
               v-model="userQuestion"
-              placeholder="请输入您的问题，Shift+Enter换行"
+              placeholder="请输入您的问题，Enter换行"
               type="textarea"
               :rows="2"
               resize="none"

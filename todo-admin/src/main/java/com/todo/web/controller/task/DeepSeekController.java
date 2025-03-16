@@ -1,6 +1,7 @@
 package com.todo.web.controller.task;
 
 import com.todo.common.core.controller.BaseController;
+import com.todo.common.core.domain.entity.SysTask;
 import com.todo.task.service.DeepSeekService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Logger;
 
 @CrossOrigin
@@ -70,5 +72,10 @@ public class DeepSeekController extends BaseController {
     @PostMapping("/chat")
     public String chat(@RequestParam String message) {
         return deepSeekService.callDeepSeek(getUserId(),message);
+    }
+
+    @GetMapping("/generateTask")
+    public List<SysTask> generateTask(@RequestParam String message, @RequestParam(defaultValue = "100") int maxTokens) {
+        return deepSeekService.generateTask(message,maxTokens);
     }
 }

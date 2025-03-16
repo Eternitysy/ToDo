@@ -1,9 +1,13 @@
 package com.todo.task.service.impl;
 
+import cn.hutool.json.JSONArray;
+import cn.hutool.json.JSONUtil;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.todo.common.constant.CacheConstants;
+import com.todo.common.core.domain.entity.SysTask;
 import com.todo.common.core.redis.RedisCache;
+import com.todo.common.utils.StringUtils;
 import com.todo.task.domain.DeepSeekRequest;
 import com.todo.task.domain.DeepSeekResponse;
 import com.todo.task.service.DeepSeekService;
@@ -173,5 +177,47 @@ public class DeepSeekServiceImpl implements DeepSeekService {
 
     private String getChatKey(Long userId) {
         return CacheConstants.DEEP_SEEK_CHAT_KEY + userId;
+    }
+
+    public List<SysTask> generateTask(String message, int maxTokens) {
+        String template = "请根据以下目标任务，拆解成一个详细的任务列表。返回的结果必须是 JSON 格式；每个任务包含以下字段： taskName（任务名称）、description（任务描述）、orderNum（处理次序）、parentId（父级任务id，目标任务的 id 固定为10）、ancestors（组级列表）、startTime（任务开始日期，格式YYYY-MM-DD）、deadline（截止日期，格式YYYY-MM-DD）。目标任务：";
+        String instructions = template + message;
+        String result = callDeepSeek(1L,instructions);
+        System.out.println("result = " + result);
+        List<SysTask> taskList = createTaskList(result);
+        return taskList;
+    }
+
+    private List<SysTask> createTaskList(String result) {
+        // 预处理
+        String cleaned = preprocessJSON(result);
+        System.out.println("cleaned = " + cleaned);
+        JSONArray jsonArray = JSONUtil.parseArray(cleaned);
+        List<SysTask> taskList = JSONUtil.toList(jsonArray, SysTask.class);
+        System.out.println("taskList = " + taskList);
+        return taskList;
+    }
+
+    // JSON预处理方法
+    private String preprocessJSON(String raw) {
+        // 1. 去除首尾无效字符
+        String trimmed = raw.trim()
+                .replaceAll("^[^\\[]*", "")  // 去除JSON数组前的无效字符
+                .replaceAll("[^\\]]*$", ""); // 去除JSON数组后的无效字符
+
+        // 2. 检查括号平衡
+        int openBrackets = StringUtils.countMatches(trimmed, '{');
+        int closeBrackets = StringUtils.countMatches(trimmed, '}');
+        if (openBrackets > closeBrackets) {
+            trimmed += "}".repeat(openBrackets - closeBrackets);
+        }
+        int b = StringUtils.countMatches(trimmed, '[');
+        int c = StringUtils.countMatches(trimmed, ']');
+        if (b > c) {
+            trimmed += "]".repeat(b - c);
+        }
+
+        // 3. 修复未闭合的对象
+        return trimmed.replaceAll("}(\\s*)([^]}]*)$", "}$1]");
     }
 }

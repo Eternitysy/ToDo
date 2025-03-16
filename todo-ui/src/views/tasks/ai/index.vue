@@ -404,8 +404,7 @@ export default {
 
 /* 固定在聊天区域底部的输入区域 */
 .chat-input-container {
-  position: relative;
-  padding: 10px;
+  padding-bottom: 10px;
   background-color: #fff;
   border-top: 1px solid #ebeef5;
   display: flex;
