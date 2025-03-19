@@ -18,7 +18,7 @@
                 <div class="message-content">
                   <!-- 流式消息特殊处理 -->
                   <template v-if="msg.isStreaming">
-                    <span v-html="msg.text"></span>
+                    <span v-html="msg.html"></span>
                     <span class="stream-cursor"></span>
                   </template>
                   <template v-else>
@@ -135,7 +135,19 @@
 
 <script>
 import { generateTask, chatStream, addTasks } from "@/api/tasks/task";
+import marked from 'marked';
+import DOMPurify from 'dompurify';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/github.css';
 
+// 配置Markdown解析器
+marked.setOptions({
+  highlight: function(code, lang) {
+    const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+    return hljs.highlight(code, { language }).value;
+  },
+  breaks: true
+});
 export default {
   data() {
     return {
@@ -145,7 +157,8 @@ export default {
       userQuestion: "",
       isProcessing: false,
       taskGenerating: false,
-      eventSource: null
+      eventSource: null,
+      markdownCache: new Map() // 用于缓存未闭合的代码块
     };
   },
   methods: {
@@ -247,15 +260,68 @@ export default {
       }
     },
 
-// 移除parseSSEEvent方法（已整合到主流程）
-
     updateAiMessage(content) {
       const currentMsg = this.conversation[this.currentAiMessageIndex];
-      this.$set(this.conversation, this.currentAiMessageIndex, {
-        ...currentMsg,
-        text: currentMsg.text + content
+      // 更新原始文本（保留原始数据）
+      currentMsg.text += content;
+
+      // 流式Markdown处理逻辑
+      const parseStreamMarkdown = (text) => {
+        let parsed = text;
+
+        // 处理未闭合的代码块（使用缓存）
+        const cacheKey = `msg_${this.currentAiMessageIndex}`;
+        const cached = this.markdownCache.get(cacheKey) || {};
+
+        // 匹配代码块
+        const codeBlockRegex = /```([\s\S]*?)```/g;
+        let matches;
+        let lastIndex = 0;
+        let result = '';
+
+        while ((matches = codeBlockRegex.exec(text)) !== null) {
+          // 处理代码块之前的内容
+          result += marked.parse(text.slice(lastIndex, matches.index));
+
+          // 处理代码块
+          const lang = matches[1].split('\n')[0].trim() || 'plaintext';
+          const codeContent = matches[1].slice(lang.length).trim();
+
+          result += `<pre><code class="language-${lang}">${
+            hljs.highlight(codeContent, { language: lang }).value
+          }</code></pre>`;
+
+          lastIndex = codeBlockRegex.lastIndex;
+        }
+
+        // 处理剩余内容
+        result += marked.parse(text.slice(lastIndex));
+
+        // 缓存未闭合的代码块
+        const openCodeBlock = text.match(/```[^\n]*$/);
+        if (openCodeBlock) {
+          this.markdownCache.set(cacheKey, {
+            lang: openCodeBlock[0].replace(/```/, '').trim(),
+            content: text.slice(text.lastIndexOf('```') + 3)
+          });
+        } else {
+          this.markdownCache.delete(cacheKey);
+        }
+
+        return result;
+      };
+
+      // 生成安全HTML（带流式处理优化）
+      currentMsg.html = DOMPurify.sanitize(parseStreamMarkdown(currentMsg.text));
+
+      // 优化响应式更新
+      this.$nextTick(() => {
+        this.$set(this.conversation, this.currentAiMessageIndex, {
+          ...currentMsg,
+          html: currentMsg.html
+        });
+        this.scrollChatToBottom();
       });
-      this.scrollChatToBottom();
     },
 
     // 任务生成逻辑
@@ -453,5 +519,81 @@ export default {
 .message-fade-enter, .message-fade-leave-to {
   opacity: 0;
   transform: translateY(10px);
+}
+
+/* Markdown内容样式 */
+.chat-message.ai ::v-deep pre {
+  background-color: #f6f8fa;
+  padding: 15px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.chat-message.ai ::v-deep code {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 14px;
+}
+
+.chat-message.ai ::v-deep blockquote {
+  border-left: 4px solid #dfe2e5;
+  margin: 0;
+  padding: 0 15px;
+  color: #6a737d;
+}
+
+.chat-message.ai ::v-deep table {
+  border-collapse: collapse;
+  margin: 1em 0;
+}
+
+.chat-message.ai ::v-deep th,
+.chat-message.ai ::v-deep td {
+  border: 1px solid #dfe2e5;
+  padding: 6px 13px;
+}
+
+/* Markdown内容样式 */
+.chat-message.ai pre {
+  background-color: #f6f8fa !important;
+  padding: 15px !important;
+  border-radius: 6px !important;
+  overflow-x: auto !important;
+  margin: 10px 0 !important;
+}
+
+.chat-message.ai code {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace !important;
+  font-size: 14px !important;
+  background-color: rgba(175,184,193,0.2) !important;
+  padding: 0.2em 0.4em !important;
+  border-radius: 3px !important;
+}
+
+.chat-message.ai pre code {
+  background: none !important;
+  padding: 0 !important;
+}
+
+.chat-message.ai blockquote {
+  border-left: 4px solid #dfe2e5 !important;
+  margin: 1em 0 !important;
+  padding: 0 1em !important;
+  color: #6a737d !important;
+}
+
+.chat-message.ai table {
+  border-collapse: collapse !important;
+  margin: 1em 0 !important;
+  width: 100% !important;
+}
+
+.chat-message.ai th,
+.chat-message.ai td {
+  border: 1px solid #dfe2e5 !important;
+  padding: 6px 13px !important;
+}
+
+.chat-message.ai tr:nth-child(even) {
+  background-color: #f6f8fa !important;
 }
 </style>
